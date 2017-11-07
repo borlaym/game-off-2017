@@ -3,9 +3,14 @@
 	margin: 20px auto;
 }
 
-.node-builder textarea {
+.node-builder .text-input {
 	min-height: 200px;
 	font-size: 16px;
+}
+
+.node-builder .option-input {
+	font-size: 16px;
+	margin-bottom: 20px;
 }
 
 .tag-suggestion {
@@ -18,7 +23,8 @@
 	background: gray;
 }
 
-.text-input__suggestions {
+.text-input__suggestions,
+.option-input__suggestions {
 	top: 18px;
 	border: 1px solid black;
 }
