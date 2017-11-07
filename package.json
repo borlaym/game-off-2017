@@ -10,14 +10,15 @@
     "express": "^4.16.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-mentions": "^1.2.1",
     "react-scripts": "1.0.17"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-	"eject": "react-scripts eject",
-	"server": "babel-node ./server/index.js",
+    "eject": "react-scripts eject",
+    "server": "babel-node ./server/index.js",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
