@@ -14,6 +14,8 @@ const tags = ['BRAVE', 'COWARD', 'ALIEN', 'CYBORG'].map(_ => ({ id: _, display: 
 
 storiesOf('NodeBuilder', module).add('', () => <NodeBuilder tags={tags} onChange={action('change')} />);
 storiesOf('Node', module).add('Basic', () => (
-	<Node {...sampleNode} />
+	<Node node={sampleNode} onAction={action('action')} />
 ));
-storiesOf('Option', module).add('Basic', () => (<Option {...sampleNode.options[0]}/>));
+storiesOf('Option', module).add('Basic', () => (
+	<Option option={sampleNode.options[0]} onSelect={action('click')} />
+));

@@ -3,18 +3,25 @@
 import * as React from 'react';
 import type { Option } from '../../types';
 
-export default (props: Option) => {
+export default ({
+	option,
+	player,
+	onSelect
+}:{
+	option: Option,
+	player: Player,
+	onSelect: Function
+}) => {
 	const {
 		text,
 		conditions
-	} = props;
-	console.log(conditions);
+	} = option;
 	const visibleTags = conditions
 		.filter(_ => _.visibility !== 'HIDDEN')
 		.map(_ => _.name)
 		.join(' and ');
 	return (
-		<div className='event-node__option'>
+		<div className='event-node__option' onClick={_ => onSelect(option)}>
 			<p className='event-node__option__condition'>
 				{visibleTags}
 			</p>
