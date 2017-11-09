@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import firebase from './firebase';
+
 import logo from './logo.svg';
 import './App.css';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from './components/appbar';
 
-import Auth from './components/auth/index';
+const Home = ({ user }) =>
+	user ? <p>Welcome {user.displayName}!</p> : <p>Please log in.</p>;
 
 class App extends Component {
+	state = {
+		user: null
+	};
+
+	componentDidMount() {
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				this.setState({ user });
+			} else {
+				this.setState({ user: null });
+			}
+		});
+	}
+
 	render() {
 		return (
 			<MuiThemeProvider>
-				<div className="App">
-					<header className="App-header">
-						<h1 className="App-title">Welcome to the academy!</h1>
-						<Auth />
-					</header>
-					<p className="App-intro">
-						To get started, edit <code>src/App.js</code> and save to
-						reload.
-					</p>
-				</div>
+				<Router>
+					<div>
+						<AppBar />
+						{
+							<Route
+								exact
+								path="/"
+								render={() => <Home user={this.state.user} />}
+							/>
+						}
+					</div>
+				</Router>
 			</MuiThemeProvider>
 		);
 	}
