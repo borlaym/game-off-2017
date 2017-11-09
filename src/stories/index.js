@@ -23,7 +23,7 @@ storiesOf('Node', module)
 .add('Basic', () => (
 	<Node
 		node={sampleNode}
-		player={samplePlayer}
+		character={samplePlayer}
 		globalTags={globalTags}
 		onAction={action('action')}
 	/>
@@ -31,7 +31,7 @@ storiesOf('Node', module)
 .add('Resolved', () => (
 	<Node
 		node={sampleNode}
-		player={samplePlayer}
+		character={samplePlayer}
 		globalTags={globalTags}
 		onAction={action('action')}
 		resolution={sampleNode.options[0]}
@@ -41,7 +41,7 @@ storiesOf('Option', module)
 .add('Basic', () => (
 	<Option
 		option={sampleNode.options[0]}
-		player={samplePlayer}
+		character={samplePlayer}
 		onSelect={action('click')}
 	/>
 ))

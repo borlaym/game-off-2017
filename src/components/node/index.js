@@ -1,20 +1,20 @@
 // @flow
 
 import * as React from 'react';
-import type { Node, Tag, Option } from '../../types';
+import type { Node, Tag, Option, Character } from '../../types';
 import OptionComponent from './option';
 import intersection from 'lodash/intersection';
 import textResolver from '../../utils/textResolver';
 
 export default ({
 	node,
-	player,
+	character,
 	globalTags,
 	onAction,
 	resolution
 }:{
 	node: Node,
-	player: Player,
+	character: Character,
 	globalTags: Array<Tag>,
 	onAction: Function,
 	resolution?: Option
@@ -29,10 +29,10 @@ export default ({
 			intersection(globalTags.map(_ => _.name), option.globalConditions.map(_ => _.name)).length > 0;
 		const fullfillsPlayerCondition =
 			option.conditions.length === 0 ||
-			intersection(player.tags.map(_ => _.name), option.conditions.map(_ => _.name)).length > 0;
+			intersection(character.tags.map(_ => _.name), option.conditions.map(_ => _.name)).length > 0;
 		return fullfillsGlobalCondition && fullfillsPlayerCondition;
 	});
-	const resolveText = textResolver(globalTags, player);
+	const resolveText = textResolver(globalTags, character);
 	return (
 		<div className='event-node'>
 			<div className='event-node__text'>
@@ -47,7 +47,7 @@ export default ({
 					{visibleOptions.map(option => (
 						<OptionComponent
 							key={option.id}
-							player={player}
+							character={character}
 							globalTags={globalTags}
 							option={option}
 							onSelect={_ => onAction(_)}

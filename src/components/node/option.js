@@ -1,17 +1,17 @@
 // @flow
 
 import * as React from 'react';
-import type { Option, Tag } from '../../types';
+import type { Option, Tag, Character } from '../../types';
 import textResolver from '../../utils/textResolver';
 
 export default ({
 	option,
-	player,
+	character,
 	globalTags = [],
 	onSelect
 }:{
 	option: Option,
-	player: Player,
+	character: Character,
 	globalTags: Array<Tag>,
 	onSelect: Function
 }) => {
@@ -23,7 +23,7 @@ export default ({
 		.filter(_ => _.visibility !== 'HIDDEN')
 		.map(_ => _.name)
 		.join(' and ');
-	const resolveText = textResolver(globalTags, player);
+	const resolveText = textResolver(globalTags, character);
 	return (
 		<div className='event-node__option' onClick={_ => onSelect(option)}>
 			<p className='event-node__option__condition'>
