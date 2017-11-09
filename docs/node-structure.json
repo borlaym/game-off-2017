@@ -1,14 +1,22 @@
 {
 	"id": "dalbckjasbca",
-	"text": "You find an alien eggs",
+	"text": "You find an alien egg",
 	"blocker": true,
 	"inGameTimestamp": "2143-02-14 11:29:22",
 	"options": [
 		{
-			"conditions": [
-				"ALIEN BIOLOGIST",
-				"ALIEN EGG IS THERE"
-			],
+			"conditions": [{
+				"name": "ALIEN BIOLOGIST",
+				"text": "This person is well versed in the forbidden art of alien biology.",
+				"visibility": "PUBLIC",
+				"modifiers": {
+					"SCIENCE": 2
+				}
+			}, {
+				"name": "ALIEN EGG IS THERE",
+				"text": "There is an alien egg in the engine room",
+				"visibility": "HIDDEN"
+			}],
 			"skillCheck": {
 				"SELF.SCIENCE": 6
 			},

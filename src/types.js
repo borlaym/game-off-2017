@@ -1,8 +1,17 @@
 // @flow
 
+export type Visibility = 'public' | 'private' | 'hidden';
+
+export type Tag = {
+	name: string,
+	text: string,
+	visibility : Visibility,
+	modifiers: { [string]: number }
+};
+
 export type TargetedTag = {
 	target: 'SELF' | 'GLOBAL',
-	tag: string
+	tag : Tag
 };
 
 export type ResultingAction = {
