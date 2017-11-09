@@ -13,6 +13,8 @@ import AdminPage from './components/admin-page';
 import TagPage from './components/tag-page';
 import NodePage from './components/node-page';
 import BrowseTagsPage from './components/browse-tags-page';
+import Auth from './components/auth/index';
+import Profile from './components/character/profile';
 
 import { RouteWithAuth } from './components/auth';
 import LoginPage from './components/auth/login';
