@@ -2,7 +2,7 @@
 
 export type Visibility = 'public' | 'private' | 'hidden';
 
-export type Player = {
+export type Character = {
 	id: string,
 	name: string,
 	tags: Array<Tag>,
@@ -55,15 +55,3 @@ export type Node = {
 	inGameTimestamp: string,
 	options: Array<Option>
 };
-
-export type CharacterProfile = {
-	id: string,
-	name: string,
-	tags: Array<string>,
-	skills: {
-		COMBAT: number,
-		SOCIAL: number,
-		WITS: number,
-		SCIENCE: number
-	}
-}
