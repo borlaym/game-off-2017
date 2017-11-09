@@ -30,6 +30,8 @@
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.14",
     "@storybook/addon-links": "^3.2.14",
-    "@storybook/react": "^3.2.14"
+    "@storybook/react": "^3.2.14",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.59.0"
   }
 }

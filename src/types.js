@@ -2,7 +2,7 @@
 
 export type Visibility = 'public' | 'private' | 'hidden';
 
-export type Player = {
+export type Character = {
 	id: string,
 	name: string,
 	tags: Array<Tag>,
