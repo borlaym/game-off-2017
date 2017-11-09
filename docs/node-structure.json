@@ -12,7 +12,8 @@
 				"modifiers": {
 					"SCIENCE": 2
 				}
-			}, {
+			}],
+			"globalConditions": [{
 				"name": "ALIEN EGG IS THERE",
 				"text": "There is an alien egg in the engine room",
 				"visibility": "HIDDEN"
@@ -45,6 +46,48 @@
 						"tag": "INFECTED"
 					}]
 				}
+			}
+		},
+		{
+			"conditions": [{
+				"name": "XENOMORPH",
+				"text": "This person hates all aliens.",
+				"visibility": "PUBLIC",
+				"modifiers": {}
+			}],
+			"globalConditions": [{
+				"name": "ALIEN EGG IS THERE",
+				"text": "There is an alien egg in the engine room",
+				"visibility": "HIDDEN"
+			}],
+			"text": "Destroy it!",
+			"logText": "[SELF] stomps on the egg hard",
+			"resultingAction": {
+				"id": 21312155,
+				"targetNode": "dasdacasarascas",
+				"effects": {
+					"loseTags": [
+						{
+							"target": "global",
+							"tag": "ALIEN EGG IS THERE"
+						}
+					]
+				}
+			}
+		},
+		{
+			"conditions": [],
+			"globalConditions": [{
+				"name": "ALIEN EGG IS THERE",
+				"text": "There is an alien egg in the engine room",
+				"visibility": "HIDDEN"
+			}],
+			"text": "Tell the others about it",
+			"logText": "[SELF] brings the alien egg to the group's attention",
+			"resultingAction": {
+				"id": 21312221,
+				"targetNode": "scascasljcso",
+				"effects": {}
 			}
 		}
 	]
