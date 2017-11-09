@@ -1,18 +1,42 @@
 {
 	"id": "dalbckjasbca",
-	"text": "You find an alien egg",
-	"visibility": "private",
+	"text": "You find an alien eggs",
+	"blocker": true,
+	"inGameTimestamp": "2143-02-14 11:29:22",
 	"options": [
 		{
 			"conditions": [
-				"ALIEN BIOLOGIST"
+				"ALIEN BIOLOGIST",
+				"ALIEN EGG IS THERE"
 			],
+			"skillCheck": {
+				"SELF.SCIENCE": 6
+			},
 			"text": "Put it away",
-			"action": {
+			"logText": "[SELF] puts the alien egg away",
+			"resultingAction": {
 				"targetNode": "dsadasdasdas",
 				"effects": {
-					"gainTags": ["ALIEN EGG"],
-					"loseTags": []
+					"gainTags": [{
+						"target": "Self",
+						"tag": "HAS ALIEN EGG"
+					}, {
+						"target": "Todd",
+						"tag": "INFECTED"
+					}],
+					"loseTags": [{
+						"target": "global",
+						"tag": "ALIEN EGG IS THERE"
+					}]
+				}
+			},
+			"failedResultingAction": {
+				"targetNode": "daasdascasca",
+				"effects": {
+					"gainTags": [{
+						"target": "Self",
+						"tag": "INFECTED"
+					}]
 				}
 			}
 		}

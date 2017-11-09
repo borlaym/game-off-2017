@@ -1,0 +1,82 @@
+{
+	"stories": {
+		"adventure-1": {
+			"name": "Advanture on an alien planet",
+			"startNode": "sasdasascas",
+			"nodes": {
+				"sasdasascas": {
+					"id": "dalbckjasbca",
+					"text": "You find an alien egg",
+					"visibility": "private",
+					"options": [
+						{
+							"conditions": [
+								"ALIEN BIOLOGIST"
+							],
+							"text": "Put it away",
+							"action": {
+								"targetNode": "dalbckjasbca",
+								"effects": {
+									"gainTags": [
+										"ALIEN EGG"
+									],
+									"loseTags": []
+								}
+							}
+						},
+						{
+							"conditions": [],
+							"text": "Tell the others about it",
+							"action": {
+								"targetNode": "cacascas",
+								"effects": {
+									"gainTags": [],
+									"loseTags": []
+								}
+							}
+						}
+					]
+				},
+				"scascasca": {
+					"id": "dalbckjasbca",
+					"text": "You put away the alien egg. It gives a strange sound.",
+					"visibility": "private",
+					"options": [
+						{
+							"conditions": ["ALIEN BIOLOGIST"],
+							"text": "Put it away",
+							"action": {
+								"targetNode": "dsadasdasdas",
+								"effects": {
+									"gainTags": [
+										"ALIEN EGG"
+									],
+									"loseTags": []
+								}
+							}
+						}
+					]
+				},
+				"scascasca": {
+					"id": "cacascas",
+					"text": "The crew gathers around the egg. It gives a strange sound.",
+					"visibility": "public",
+					"blocker": true,
+					"options": [
+						{
+							"conditions": ["XENOPHOBE"],
+							"text": "Suggest to kill it",
+							"action": {
+								"targetNode": "aaaacaca",
+								"effects": {
+									"gainTags": [],
+									"loseTags": []
+								}
+							}
+						}
+					]
+				}
+			}
+		}
+	}
+}

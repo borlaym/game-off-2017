@@ -1,7 +1,6 @@
 {
 	"name": "Bob",
-	"sex": "male",
-	"tags": [],
+	"tags": ["MALE"],
 	"skills": {
 		"COMBAT": 5,
 		"SOCIAL": 6,
