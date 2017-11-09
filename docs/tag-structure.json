@@ -1,0 +1,8 @@
+{
+	"name": "COWARD",
+	"text": "This character is running away from problems",
+	"visibility": "public",
+	"modifiers": {
+		"COMBAT": -1
+	}
+}

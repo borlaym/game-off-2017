@@ -1,0 +1,11 @@
+{
+	"name": "Bob",
+	"sex": "male",
+	"tags": [],
+	"skills": {
+		"COMBAT": 5,
+		"SOCIAL": 6,
+		"WITS": 4,
+		"SCIENCE": 3
+	}
+}

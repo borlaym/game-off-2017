@@ -1,0 +1,20 @@
+{
+	"id": "dalbckjasbca",
+	"text": "You find an alien egg",
+	"visibility": "private",
+	"options": [
+		{
+			"conditions": [
+				"ALIEN BIOLOGIST"
+			],
+			"text": "Put it away",
+			"action": {
+				"targetNode": "dsadasdasdas",
+				"effects": {
+					"gainTags": ["ALIEN EGG"],
+					"loseTags": []
+				}
+			}
+		}
+	]
+}
