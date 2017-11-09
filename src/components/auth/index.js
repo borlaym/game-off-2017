@@ -1,28 +1,18 @@
 import * as React from 'react';
-import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
-import ActionEject from 'material-ui/svg-icons/action/eject';
-import { red500 } from 'material-ui/styles/colors';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 import firebase from '../../firebase';
 
-export default class Auth extends React.Component {
-	state = {
-		user: null
-	};
+class Login extends React.Component {
+	static muiName = 'FlatButton';
 
 	constructor(props) {
 		super(props);
 		this.authenticate = this.authenticate.bind(this);
-		this.logout = this.logout.bind(this);
-	}
-
-	componentDidMount() {
-		firebase.auth().onAuthStateChanged(user => {
-			if (user) {
-				this.setState({ user });
-			}
-		});
 	}
 
 	authenticate() {
@@ -30,16 +20,28 @@ export default class Auth extends React.Component {
 		firebase
 			.auth()
 			.signInWithPopup(provider)
-			.then(function(result) {
-				// This gives you a Google Access Token. You can use it to access the Google API.
-				var token = result.credential.accessToken;
-				// The signed-in user info.
-				var user = result.user;
-				console.log(user);
-			})
 			.catch(function(error) {
 				console.error(error);
 			});
+	}
+
+	render() {
+		return (
+			<FlatButton
+				{...this.props}
+				label="Login"
+				onClick={this.authenticate}
+			/>
+		);
+	}
+}
+
+class LoggedIn extends React.Component {
+	static muiName = 'IconMenu';
+
+	constructor(props) {
+		super(props);
+		this.logout = this.logout.bind(this);
 	}
 
 	logout() {
@@ -54,24 +56,42 @@ export default class Auth extends React.Component {
 	}
 
 	render() {
-		const { user } = this.state;
 		return (
-			<div>
-				{user ? (
-					<p>
-						Hello {user.displayName}!
-						<IconButton tooltip="Logout" onClick={this.logout}>
-							<ActionEject color={red500} />
-						</IconButton>
-					</p>
-				) : (
-					<FlatButton
-						label="Login"
-						primary={true}
-						onClick={this.authenticate}
-					/>
-				)}
-			</div>
+			<IconMenu
+				{...this.props}
+				iconButtonElement={
+					<IconButton>
+						<MoreVertIcon />
+					</IconButton>
+				}
+				targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+				anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+			>
+				<MenuItem primaryText="Character" />
+				<MenuItem primaryText="Settings" />
+				<MenuItem primaryText="Sign out" onClick={this.logout} />
+			</IconMenu>
 		);
+	}
+}
+
+export default class Auth extends React.Component {
+	state = {
+		user: null
+	};
+
+	componentDidMount() {
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				this.setState({ user });
+			} else {
+				this.setState({ user: null });
+			}
+		});
+	}
+
+	render() {
+		const { user } = this.state;
+		return <div>{user ? <LoggedIn /> : <Login />}</div>;
 	}
 }
