@@ -9,8 +9,8 @@
     "body-parser": "^1.18.2",
     "classnames": "^2.2.5",
     "express": "^4.16.2",
-    "material-ui": "^0.19.4",
     "firebase": "^4.6.1",
+    "material-ui": "^0.19.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-mentions": "^1.2.1",
@@ -28,6 +28,8 @@
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.14",
     "@storybook/addon-links": "^3.2.14",
-    "@storybook/react": "^3.2.14"
+    "@storybook/react": "^3.2.14",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.59.0"
   }
 }
