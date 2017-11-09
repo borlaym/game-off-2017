@@ -15,14 +15,12 @@
 			"text": "Put it away",
 			"logText": "[SELF] puts the alien egg away",
 			"resultingAction": {
+				"id": 213121,
 				"targetNode": "dsadasdasdas",
 				"effects": {
 					"gainTags": [{
 						"target": "Self",
 						"tag": "HAS ALIEN EGG"
-					}, {
-						"target": "Todd",
-						"tag": "INFECTED"
 					}],
 					"loseTags": [{
 						"target": "global",
@@ -31,6 +29,7 @@
 				}
 			},
 			"failedResultingAction": {
+				"id": 342342,
 				"targetNode": "daasdascasca",
 				"effects": {
 					"gainTags": [{
