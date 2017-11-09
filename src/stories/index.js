@@ -19,9 +19,30 @@ const globalTags = [{
 }];
 
 storiesOf('NodeBuilder', module).add('', () => <NodeBuilder tags={tags} onChange={action('change')} />);
-storiesOf('Node', module).add('Basic', () => (
-	<Node node={sampleNode} player={samplePlayer} globalTags={globalTags} onAction={action('action')} />
+storiesOf('Node', module)
+.add('Basic', () => (
+	<Node
+		node={sampleNode}
+		player={samplePlayer}
+		globalTags={globalTags}
+		onAction={action('action')}
+	/>
+))
+.add('Resolved', () => (
+	<Node
+		node={sampleNode}
+		player={samplePlayer}
+		globalTags={globalTags}
+		onAction={action('action')}
+		resolution={sampleNode.options[0]}
+	/>
 ));
-storiesOf('Option', module).add('Basic', () => (
-	<Option option={sampleNode.options[0]} player={samplePlayer} onSelect={action('click')} />
-));
+storiesOf('Option', module)
+.add('Basic', () => (
+	<Option
+		option={sampleNode.options[0]}
+		player={samplePlayer}
+		onSelect={action('click')}
+	/>
+))
+	

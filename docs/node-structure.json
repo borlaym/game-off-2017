@@ -5,6 +5,7 @@
 	"inGameTimestamp": "2143-02-14 11:29:22",
 	"options": [
 		{
+			"id": "dasdasda",
 			"conditions": [{
 				"name": "ALIEN BIOLOGIST",
 				"text": "This person is well versed in the forbidden art of alien biology.",
@@ -49,6 +50,7 @@
 			}
 		},
 		{
+			"id": "dasdasdac",
 			"conditions": [{
 				"name": "XENOMORPH",
 				"text": "This person hates all aliens.",
@@ -76,6 +78,7 @@
 			}
 		},
 		{
+			"id": "dasdasday",
 			"conditions": [],
 			"globalConditions": [{
 				"name": "ALIEN EGG IS THERE",

@@ -38,6 +38,7 @@ export type ResultingAction = {
 }
 
 export type Option = {
+	id: string,
 	conditions: Array<string>,
 	globalConditions: Array<string>,
 	skillCheck?: { [string]: number },

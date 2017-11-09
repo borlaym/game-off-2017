@@ -1,20 +1,22 @@
 // @flow
 
 import * as React from 'react';
-import type { Node, Tag } from '../../types';
-import Option from './option';
+import type { Node, Tag, Option } from '../../types';
+import OptionComponent from './option';
 import intersection from 'lodash/intersection';
 
 export default ({
 	node,
 	player,
 	globalTags,
-	onAction
+	onAction,
+	resolution
 }:{
 	node: Node,
 	player: Player,
 	globalTags: Array<Tag>,
-	onAction: Function
+	onAction: Function,
+	resolution?: Option
 }) => {
 	const {
 		text,
@@ -34,15 +36,22 @@ export default ({
 			<div className='event-node__text'>
 				{text}
 			</div>
-			<div className='event-node__options'>
-				{visibleOptions.map(option => (
-					<Option
-						player={player}
-						option={option}
-						onSelect={_ => onAction(_)}
-					/>
-				))}
-			</div>
+			{ resolution ? (
+				<div className='event-node__result'>
+					{resolution.logText}
+				</div>
+			) : (
+				<div className='event-node__options'>
+					{visibleOptions.map(option => (
+						<OptionComponent
+							key={option.id}
+							player={player}
+							option={option}
+							onSelect={_ => onAction(_)}
+						/>
+					))}
+				</div>
+			)}
 		</div>
 	)
 }
