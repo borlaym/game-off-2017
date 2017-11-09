@@ -2,9 +2,23 @@
 
 export type Visibility = 'public' | 'private' | 'hidden';
 
+export type Player = {
+	id: string,
+	name: string,
+	tags: Array<Tag>,
+	skills: {
+		COMBAT: number,
+		SOCIAL: number,
+		WITS: number,
+		SCIENCE: number
+	}
+};
+
 export type Tag = {
 	name: string,
 	text: string,
+	gainsText?: string,
+	losesText?: string,
 	visibility : Visibility,
 	modifiers: { [string]: number }
 };
@@ -24,7 +38,9 @@ export type ResultingAction = {
 }
 
 export type Option = {
+	id: string,
 	conditions: Array<string>,
+	globalConditions: Array<string>,
 	skillCheck?: { [string]: number },
 	text: string,
 	logText: string,

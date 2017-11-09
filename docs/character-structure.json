@@ -1,7 +1,19 @@
 {
 	"id": "dasdasdasda",
 	"name": "Bob",
-	"tags": ["MALE"],
+	"tags": [{
+		"name": "ALIEN BIOLOGIST",
+		"text": "This person is well versed in the forbidden art of alien biology.",
+		"visibility": "PUBLIC",
+		"modifiers": {
+			"SCIENCE": 2
+		}
+	}, {
+		"name": "MALE",
+		"text": "Preferred pronoun: he/him.",
+		"visibility": "PUBLIC",
+		"modifiers": {}
+	}],
 	"skills": {
 		"COMBAT": 5,
 		"SOCIAL": 6,

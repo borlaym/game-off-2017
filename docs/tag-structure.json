@@ -1,6 +1,8 @@
 {
 	"name": "COWARD",
 	"text": "This character is running away from problems",
+	"gainsText": "NAME is now a coward",
+	"losesText": "NAME is no longer a coward",
 	"visibility": "public",
 	"modifiers": {
 		"COMBAT": -1
