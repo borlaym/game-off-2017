@@ -23,7 +23,7 @@
 				"SELF.SCIENCE": 6
 			},
 			"text": "Put it away",
-			"logText": "[SELF] puts the alien egg away",
+			"logText": "{%=o.player.name%} puts the alien egg away",
 			"resultingAction": {
 				"id": 213121,
 				"targetNode": "dsadasdasdas",

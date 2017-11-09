@@ -4,6 +4,7 @@ import * as React from 'react';
 import type { Node, Tag, Option } from '../../types';
 import OptionComponent from './option';
 import intersection from 'lodash/intersection';
+import textResolver from '../../utils/textResolver';
 
 export default ({
 	node,
@@ -31,14 +32,15 @@ export default ({
 			intersection(player.tags.map(_ => _.name), option.conditions.map(_ => _.name)).length > 0;
 		return fullfillsGlobalCondition && fullfillsPlayerCondition;
 	});
+	const resolveText = textResolver(globalTags, player);
 	return (
 		<div className='event-node'>
 			<div className='event-node__text'>
-				{text}
+				{resolveText(text)}
 			</div>
 			{ resolution ? (
 				<div className='event-node__result'>
-					{resolution.logText}
+					{resolveText(resolution.logText)}
 				</div>
 			) : (
 				<div className='event-node__options'>
@@ -46,6 +48,7 @@ export default ({
 						<OptionComponent
 							key={option.id}
 							player={player}
+							globalTags={globalTags}
 							option={option}
 							onSelect={_ => onAction(_)}
 						/>
