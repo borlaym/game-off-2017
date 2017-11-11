@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { TextField, Button } from 'material-ui';
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
+import { TextField, Button } from 'material-ui-next';
+import Grid from 'material-ui-next/Grid';
+import Typography from 'material-ui-next/Typography';
+import Select from 'material-ui-next/Select';
+import { MenuItem } from 'material-ui-next/Menu';
 
 export default class TagBuilder extends React.Component {
 	constructor(props) {
