@@ -10,7 +10,7 @@ export default class TagBuilder extends React.Component {
 		super(props);
 		this.state = {
 			name: props.name || '',
-			description: props.text || '',
+			description: props.description || '',
 			gainsText: props.gainsText || '',
 			losesText: props.losesText || '',
 			visibility: props.visibility || 'PUBLIC',

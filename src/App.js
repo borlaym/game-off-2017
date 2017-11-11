@@ -56,6 +56,11 @@ class App extends Component {
 								path="/admin/tags/browse"
 								render={() => <BrowseTagsPage user={this.state.user} />}
 							/>
+							<Route
+								exact
+								path="/admin/tags/edit/:tag"
+								render={({ match }) => <TagPage user={this.state.user} tag={match.params.tag} />}
+							/>
 					</div>
 				</Router>
 			</MuiThemeProvider>

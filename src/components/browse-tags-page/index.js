@@ -21,7 +21,7 @@ export default class BrowseTagPage extends React.Component {
 			<div>
 				<h3>Browse tags</h3>
 				<ul>
-					{Object.keys(this.state.tags).map((tag) => <li><Link key={tag} to={`/admin/tags/${tag}`}>{tag}</Link></li>)}
+					{Object.keys(this.state.tags).map((tag) => <li><Link key={tag} to={`/admin/tags/edit/${tag}`}>{tag}</Link></li>)}
 				</ul>
 			</div>
 		);
