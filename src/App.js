@@ -9,6 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from './components/appbar';
 import AdminPage from './components/admin-page';
 import TagPage from './components/tag-page';
+import NodePage from './components/node-page';
 import BrowseTagsPage from './components/browse-tags-page';
 
 const Home = ({ user }) =>
@@ -60,6 +61,11 @@ class App extends Component {
 								exact
 								path="/admin/tags/edit/:tag"
 								render={({ match }) => <TagPage user={this.state.user} tag={match.params.tag} />}
+							/>
+							<Route
+								exact
+								path="/admin/nodes/create"
+								render={() => <NodePage user={this.state.user} />}
 							/>
 					</div>
 				</Router>
