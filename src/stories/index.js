@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 import NodeBuilder from '../components/node-builder';
+import TagBuilder from '../components/tag-builder';
 import Node from '../components/node';
 import Option from '../components/node/option';
 import sampleNode from '../../docs/node-structure.json';
@@ -18,7 +19,21 @@ const globalTags = [{
 	"visibility": "HIDDEN"
 }];
 
-storiesOf('NodeBuilder', module).add('', () => <NodeBuilder tags={tags} onChange={action('change')} />);
+storiesOf('TagBuilder', module)
+.add('', () => (
+	<TagBuilder
+		onChange={action('change')}
+	/>
+));
+
+storiesOf('NodeBuilder', module)
+.add('', () => (
+	<NodeBuilder
+		tags={tags}
+		onChange={action('change')}
+	/>
+));
+
 storiesOf('Node', module)
 .add('Basic', () => (
 	<Node
@@ -37,6 +52,7 @@ storiesOf('Node', module)
 		resolution={sampleNode.options[0]}
 	/>
 ));
+
 storiesOf('Option', module)
 .add('Basic', () => (
 	<Option
