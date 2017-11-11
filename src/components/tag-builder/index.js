@@ -31,7 +31,7 @@ export default class TagBuilder extends React.Component {
 
 	handleSave() {
 		if (this.state.name.length > 0) {
-			this.props.onChange(this.state);
+			this.props.onSave(this.state);
 		}
 	}
 

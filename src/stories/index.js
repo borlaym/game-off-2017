@@ -22,7 +22,7 @@ const globalTags = [{
 storiesOf('TagBuilder', module)
 .add('', () => (
 	<TagBuilder
-		onChange={action('change')}
+		onSave={action('save')}
 	/>
 ));
 

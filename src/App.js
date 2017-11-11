@@ -7,6 +7,8 @@ import './App.css';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from './components/appbar';
+import AdminPage from './components/admin-page';
+import TagPage from './components/tag-page';
 
 const Home = ({ user }) =>
 	user ? <p>Welcome {user.displayName}!</p> : <p>Please log in.</p>;
@@ -18,6 +20,7 @@ class App extends Component {
 
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged(user => {
+			console.log(user);
 			if (user) {
 				this.setState({ user });
 			} else {
@@ -32,13 +35,21 @@ class App extends Component {
 				<Router>
 					<div>
 						<AppBar />
-						{
 							<Route
 								exact
 								path="/"
 								render={() => <Home user={this.state.user} />}
 							/>
-						}
+							<Route
+								exact
+								path="/admin"
+								render={() => <AdminPage user={this.state.user} />}
+							/>
+							<Route
+								exact
+								path="/admin/tags/create"
+								render={() => <TagPage user={this.state.user} />}
+							/>
 					</div>
 				</Router>
 			</MuiThemeProvider>
