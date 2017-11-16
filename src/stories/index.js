@@ -5,7 +5,9 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 import NodeBuilder from '../components/node-builder';
+import OptionBuilder from '../components/node-builder/option-builder';
 import TagBuilder from '../components/tag-builder';
+import TagSelector from '../components/tag-selector';
 import Node from '../components/node';
 import Option from '../components/node/option';
 import sampleNode from '../../docs/node-structure.json';
@@ -27,12 +29,26 @@ storiesOf('TagBuilder', module)
 ));
 
 storiesOf('NodeBuilder', module)
-.add('', () => (
+.add('NodeBuilder', () => (
 	<NodeBuilder
 		tags={tags}
 		onChange={action('change')}
 	/>
+))
+.add('OptionBuilder', () => (
+	<OptionBuilder
+		tags={tags}
+		onChange={action('change')}
+	/>
 ));
+
+storiesOf('TagSelector', module)
+.add('Basic', () => (
+	<TagSelector
+		allTags={tags}
+		value={[tags[0]]}
+	/>
+))
 
 storiesOf('Node', module)
 .add('Basic', () => (
@@ -61,4 +77,3 @@ storiesOf('Option', module)
 		onSelect={action('click')}
 	/>
 ))
-	
