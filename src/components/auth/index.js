@@ -1,97 +1,59 @@
-import * as React from 'react';
-import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import React, { Component } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-import firebase from '../../firebase';
+import { auth, isAuthenticated } from '../../firebase';
 
-class Login extends React.Component {
-	static muiName = 'FlatButton';
+import { getDisplayName } from '../../utils/debug';
 
-	constructor(props) {
-		super(props);
-		this.authenticate = this.authenticate.bind(this);
-	}
+export const withUser = WrappedComponent => {
+	return class extends Component {
+		static displayName = `withUser(${getDisplayName(WrappedComponent)})`;
 
-	authenticate() {
-		const provider = new firebase.auth.GoogleAuthProvider();
-		firebase
-			.auth()
-			.signInWithPopup(provider)
-			.catch(function(error) {
-				console.error(error);
-			});
-	}
+		state = {
+			user: null
+		};
 
-	render() {
-		return (
-			<FlatButton
-				{...this.props}
-				label="Login"
-				onClick={this.authenticate}
-			/>
-		);
-	}
-}
-
-class LoggedIn extends React.Component {
-	static muiName = 'IconMenu';
-
-	constructor(props) {
-		super(props);
-		this.logout = this.logout.bind(this);
-	}
-
-	logout() {
-		firebase
-			.auth()
-			.signOut()
-			.then(() => {
-				this.setState({
-					user: null
-				});
-			});
-	}
-
-	render() {
-		return (
-			<IconMenu
-				{...this.props}
-				iconButtonElement={
-					<IconButton>
-						<MoreVertIcon />
-					</IconButton>
+		componentDidMount() {
+			auth.onAuthStateChanged(user => {
+				if (user) {
+					const { uid, displayName } = user;
+					this.setState({ user: { uid, displayName } });
+				} else {
+					this.setState({ user: null });
 				}
-				targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-				anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-			>
-				<MenuItem primaryText="Character" />
-				<MenuItem primaryText="Settings" />
-				<MenuItem primaryText="Sign out" onClick={this.logout} />
-			</IconMenu>
-		);
-	}
-}
+			});
+		}
 
-export default class Auth extends React.Component {
-	state = {
-		user: null
+		render() {
+			const { user } = this.state;
+			return <WrappedComponent {...this.props} user={user} />;
+		}
 	};
+};
 
-	componentDidMount() {
-		firebase.auth().onAuthStateChanged(user => {
-			if (user) {
-				this.setState({ user });
-			} else {
-				this.setState({ user: null });
-			}
-		});
-	}
-
-	render() {
-		const { user } = this.state;
-		return <div>{user ? <LoggedIn /> : <Login />}</div>;
-	}
+function componentFunction(props, renderProps) {
+	const { component: WrappedComponent, render, user } = props;
+	return WrappedComponent ? (
+		<WrappedComponent {...renderProps} user={user} />
+	) : (
+		render({ user, ...renderProps })
+	);
 }
+
+function renderFunction(props, renderProps) {
+	return isAuthenticated() ? (
+		componentFunction(props, renderProps)
+	) : (
+		<Redirect
+			to={{
+				pathname: '/login',
+				state: { from: renderProps.location }
+			}}
+		/>
+	);
+}
+
+export const RouteWithAuth = withUser(props => {
+	const { component, render, user, ...routeProps } = props;
+	return <Route {...routeProps} render={renderFunction.bind(null, props)} />;
+});
