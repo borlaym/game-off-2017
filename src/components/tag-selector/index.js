@@ -6,6 +6,7 @@ import Autosuggest from 'react-autosuggest';
 import Chip from 'material-ui-next/Chip';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
+import uniq from 'lodash/uniq';
 
 function renderInput(inputProps) {
   const { classes, autoFocus, value, ref, ...other } = inputProps;
@@ -100,6 +101,10 @@ export default class TagSelector extends React.Component {
             value: newValue,
         });
     };
+
+    handleSuggestionSelected(event, { suggestion }) {
+        this.props.onChange(uniq(this.props.value.concat([suggestion])));
+    }
     render() {
         return (
             <div>
@@ -112,6 +117,7 @@ export default class TagSelector extends React.Component {
                     renderSuggestionsContainer={renderSuggestionsContainer}
                     getSuggestionValue={getSuggestionValue}
                     renderSuggestion={renderSuggestion}
+                    onSuggestionSelected={this.handleSuggestionSelected.bind(this)}
                     inputProps={{
                         autoFocus: true,
                         placeholder: 'Add a tag',

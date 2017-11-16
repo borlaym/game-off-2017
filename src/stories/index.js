@@ -47,6 +47,7 @@ storiesOf('TagSelector', module)
 	<TagSelector
 		allTags={tags}
 		value={[tags[0]]}
+		onChange={action('change')}
 	/>
 ))
 
