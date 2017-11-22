@@ -5,8 +5,8 @@ import type { Character, Tag } from '../types';
 
 export default (
 	globalTags: Array<Tag>,
-	character: Character
+	character: Character,
 ) => ((template: string) => tmpl(template, {
 	global: globalTags,
-	player: character
+	player: character,
 }));

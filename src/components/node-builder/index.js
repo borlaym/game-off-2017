@@ -16,7 +16,7 @@ export default class NodeBuilder extends React.Component {
 			inGameTimestamp: props.inGameTimestamp || '2080-01-01T06:00',
 			visibility: props.visibility || 'PUBLIC',
 			notes: props.notes || '',
-			options: props.options || []
+			options: props.options || [],
 		};
 		Object.keys(this.state).forEach((key) => {
 			const capitalized = `${key[0].toUpperCase()}${key.substr(1)}`;
@@ -27,7 +27,7 @@ export default class NodeBuilder extends React.Component {
 
 	handleChange(key, event) {
 		this.setState({
-			[key]: event.target.value
+			[key]: event.target.value,
 		});
 	}
 

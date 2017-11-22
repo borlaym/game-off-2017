@@ -5,16 +5,16 @@ import { auth, isAuthenticated } from '../../firebase';
 
 import { getDisplayName } from '../../utils/debug';
 
-export const withUser = WrappedComponent => {
-	return class extends Component {
+export const withUser = WrappedComponent =>
+	class extends Component {
 		static displayName = `withUser(${getDisplayName(WrappedComponent)})`;
 
 		state = {
-			user: null
+			user: null,
 		};
 
 		componentDidMount() {
-			auth.onAuthStateChanged(user => {
+			auth.onAuthStateChanged((user) => {
 				if (user) {
 					const { uid, displayName } = user;
 					this.setState({ user: { uid, displayName } });
@@ -29,7 +29,6 @@ export const withUser = WrappedComponent => {
 			return <WrappedComponent {...this.props} user={user} />;
 		}
 	};
-};
 
 function componentFunction(props, renderProps) {
 	const { component: WrappedComponent, render, user } = props;
@@ -47,13 +46,15 @@ function renderFunction(props, renderProps) {
 		<Redirect
 			to={{
 				pathname: '/login',
-				state: { from: renderProps.location }
+				state: { from: renderProps.location },
 			}}
 		/>
 	);
 }
 
-export const RouteWithAuth = withUser(props => {
-	const { component, render, user, ...routeProps } = props;
-	return <Route {...routeProps} render={renderFunction.bind(null, props)} />;
+export const RouteWithAuth = withUser((props) => {
+	const {
+		component, render, user, ...routeProps
+	} = props;
+	return <Route {...routeProps} render={() => renderFunction(props)} />;
 });
