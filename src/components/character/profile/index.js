@@ -1,14 +1,43 @@
 import * as React from 'react';
+import { withRouter } from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton';
 
-export default class CharacterProfile extends React.Component {
+import { createCharacter } from '../../../utils/api';
 
-	componentDidMount() {
-		firebase.auth().onAuthStateChanged(user => {
-			if (user) {
-				this.setState({ user });
-				console.log(user);
-			}
-		});
+class CharacterProfile extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.createDummyCharacter = this.createDummyCharacter.bind(this);
 	}
 
+	createDummyCharacter() {
+		const { user, history } = this.props;
+
+		createCharacter(user.uid, {
+			id: '',
+			name: user.displayName,
+			tags: [],
+			skills: {
+				COMBAT: 0,
+				SOCIAL: 0,
+				WITS: 0,
+				SCIENCE: 0,
+			},
+		}).then(() => history.push('/character/profile/yours'));
+	}
+
+	render() {
+		return (
+			<div>
+				<p>Give me tha details</p>,
+				<FlatButton
+					label="Fake Me a Character"
+					onClick={this.createDummyCharacter}
+				/>
+			</div>
+		);
+	}
 }
+
+export default withRouter(CharacterProfile);

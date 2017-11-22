@@ -1,8 +1,8 @@
 import * as React from 'react';
-import firebase from '../../firebase';
+import { auth } from '../../firebase';
 
 export function LogOut() {
-	firebase.auth().signOut();
+	auth.signOut();
 }
 
 export default class LoggedIn extends React.Component {

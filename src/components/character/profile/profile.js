@@ -1,9 +1,3 @@
-import * as React from 'react';
-import type { CharacterProfile } from '../../types';
+// import React from 'react';
 
-export default (props: CharacterProfile) => {
-	console.log(props);
-	return (
-		<p>Character profile placeholder</p>
-	)
-}
+export default () => {};
