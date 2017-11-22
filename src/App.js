@@ -13,17 +13,13 @@ import AdminPage from './components/admin-page';
 import TagPage from './components/tag-page';
 import NodePage from './components/node-page';
 import BrowseTagsPage from './components/browse-tags-page';
-import Auth from './components/auth/index';
-import Profile from './components/character/profile';
+import CharacterProfile from './components/character/profile';
 
 import { RouteWithAuth } from './components/auth';
 import LoginPage from './components/auth/login';
 import LogoutPage from './components/auth/logout';
 
-const Home = (props) => {
-	const { user } = props;
-	return user ? <p>Welcome {user.displayName}!</p> : <p>Please log in.</p>;
-};
+import Home from './components/home';
 
 const NoMatch = () => <h1>404</h1>;
 
@@ -32,13 +28,18 @@ function App() {
 		<MuiThemeProvider>
 			<Router>
 				<Switch>
-					<RouteWithAuth exact path="/" component={Home} />
+					<Route exact path="/" component={Home} />
 					<RouteWithAuth
 						exact
 						path="/logout"
 						component={LogoutPage}
 					/>
 					<Route exact path="/login" component={LoginPage} />
+					<RouteWithAuth
+						exact
+						path="/character/create"
+						component={CharacterProfile}
+					/>
 					<RouteWithAuth
 						exact
 						path="/admin"
