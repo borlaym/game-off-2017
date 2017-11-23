@@ -3,24 +3,19 @@
 export type Visibility = 'public' | 'private' | 'hidden';
 
 export type Tag = {
+	id: string,
 	name: string,
-	text: string,
+	description: string,
 	gainsText?: string,
 	losesText?: string,
-	visibility: Visibility,
-	modifiers: { [string]: number }
+	visibility: Visibility
 };
 
 export type Character = {
 	id: string,
 	name: string,
 	tags: Array<Tag>,
-	skills: {
-		COMBAT: number,
-		SOCIAL: number,
-		WITS: number,
-		SCIENCE: number
-	}
+	sex: 'male' | 'female'
 };
 
 export type TargetedTag = {

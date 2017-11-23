@@ -1,3 +1,5 @@
+// @flow
+
 import * as React from 'react';
 import { TextField, Button } from 'material-ui-next';
 import Grid from 'material-ui-next/Grid';
@@ -5,39 +7,84 @@ import Typography from 'material-ui-next/Typography';
 import Select from 'material-ui-next/Select';
 import { MenuItem } from 'material-ui-next/Menu';
 
-export default class TagBuilder extends React.Component {
-	constructor(props) {
+import type { Tag } from '../../types';
+
+type Props = Tag & {
+	onSave: (Tag) => void
+};
+
+type TagField = 'Id' | 'Name' | 'Description' | 'GainsText' | 'LosesText' | 'Visibility';
+
+const toSlug = (str: string) =>
+	str
+		.toLowerCase()
+		.replace(/[^\w ]+/g, '')
+		.replace(/ +/g, '-');
+
+export default class TagBuilder extends React.Component<Props, Tag> {
+	constructor(props: Props) {
 		super(props);
+
+		const {
+			onSave,
+			...tagsFromProp
+		} = props;
+
 		this.state = {
-			name: props.name || '',
-			description: props.description || '',
-			gainsText: props.gainsText || '',
-			losesText: props.losesText || '',
-			visibility: props.visibility || 'PUBLIC',
-			notes: props.notes || '',
+			...this.state,
+			...tagsFromProp,
 		};
-		Object.keys(this.state).forEach((key) => {
-			const capitalized = `${key[0].toUpperCase()}${key.substr(1)}`;
+
+		Object.keys(this.state).forEach((key: TagField) => {
+			const capitalized: TagField = `${key[0].toUpperCase()}${key.substr(1)}`;
 			this[`handle${capitalized}Change`] = this.handleChange.bind(this, key);
 		});
+
 		this.handleSave = this.handleSave.bind(this);
 	}
 
-	handleChange(key, event) {
+	state = {
+		id: '',
+		name: '',
+		description: '',
+		gainsText: '',
+		losesText: '',
+		visibility: 'public',
+	};
+
+	handleSave: (SyntheticInputEvent<>) => void;
+	handleIdChange: (SyntheticInputEvent<>) => void;
+	handleNameChange: (SyntheticInputEvent<>) => void;
+	handleDescriptionChange: (SyntheticInputEvent<>) => void;
+	handleGainsTextChange: (SyntheticInputEvent<>) => void;
+	handleLosesTextChange: (SyntheticInputEvent<>) => void;
+	handleVisibilityChange: (SyntheticInputEvent<>) => void;
+
+	handleChange(key: string, event: SyntheticInputEvent<>) {
 		this.setState({
 			[key]: event.target.value,
 		});
 	}
 
 	handleSave() {
+		const tagData = { ...this.state };
 		if (this.state.name.length > 0) {
-			this.props.onSave(this.state);
+			if (tagData.id.length === 0) {
+				tagData.id = toSlug(tagData.name);
+			}
+			this.props.onSave(tagData);
 		}
 	}
 
 	render() {
+		const { name } = this.state;
+
 		return (
 			<Grid container>
+				<Grid item xs={12}>
+					<Typography type="subheading">ID</Typography>
+					<TextField value={this.state.id} onChange={this.handleIdChange} />
+				</Grid>
 				<Grid item xs={12}>
 					<Typography type="subheading">Name</Typography>
 					<TextField value={this.state.name} onChange={this.handleNameChange} />
@@ -57,17 +104,13 @@ export default class TagBuilder extends React.Component {
 				<Grid item xs={12}>
 					<Typography type="subheading">Visibility</Typography>
 					<Select value={this.state.visibility} onChange={this.handleVisibilityChange}>
-						<MenuItem value="PUBLIC">PUBLIC</MenuItem>
-						<MenuItem value="PRIVATE">PRIVATE</MenuItem>
-						<MenuItem value="HIDDEN">HIDDEN</MenuItem>
+						<MenuItem value="public">public</MenuItem>
+						<MenuItem value="private">private</MenuItem>
+						<MenuItem value="hidden">hidden</MenuItem>
 					</Select>
 				</Grid>
 				<Grid item xs={12}>
-					<Typography type="subheading">Notes</Typography>
-					<TextField value={this.state.notes} onChange={this.handleNotesChange} multiline />
-				</Grid>
-				<Grid item xs={12}>
-					<Button onClick={this.handleSave} color="primary" raised>Save</Button>
+					<Button onClick={this.handleSave} color="primary" raised disabled={!name.length}>Save</Button>
 				</Grid>
 			</Grid>
 		);
