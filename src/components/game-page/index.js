@@ -24,35 +24,30 @@ class GamePage extends React.Component<*, State> {
 
 	}
 	
-	componentWillMount() {
-		const { history } = this.props;
-		
-		if (!isAuthenticated()) {
-			history.push('/login');
-		}
-		
-		auth.onAuthStateChanged((user) => {
-			if (user) {
-				resolveCharacter(user.uid)
-				.then((player) => {
-					resolveParty(player)
-						.then(party => {
-							console.log(resolveGameState({
-								adventure: Adventure,
-								party,
-								player
-							}))
-							this.setState({
-								character: player
-							});
-						});
-				})
-				.catch((err) => {
-					console.log(err);
-					history.push('/character/create')
-				});
-			}
-		});
+	componentDidMount() {
+		this.props.gameData
+			.then((gameData) => gameData.party)
+			.then((party) => {
+				console.log(party);
+			});
+			// resolveCharacter(user.uid)
+			// .then((player) => {
+			// 	resolveParty(player)
+			// 		.then(party => {
+			// 			console.log(resolveGameState({
+			// 				adventure: Adventure,
+			// 				party,
+			// 				player
+			// 			}))
+			// 			this.setState({
+			// 				character: player
+			// 			});
+			// 		});
+			// })
+			// .catch((err) => {
+			// 	console.log(err);
+			// 	history.push('/character/create')
+			// });
 	}
 
 	handleAction(action: ResultingAction) {

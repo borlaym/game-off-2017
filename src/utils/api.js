@@ -33,22 +33,8 @@ export function resolveCharacter(userID: string): Promise<Character> {
 	});
 }
 
-export function resolveParty(character: Character): Promise<Party> {
-	const partyRef = db.ref(`parties/${character._partyRef}`);
-
-	return new Promise((resolve, reject) => {
-		partyRef.once('value', (snapshot) => {
-			if (snapshot.exists()) {
-				resolve(snapshot.val());
-			} else {
-				reject();
-			}
-		});
-	});
-}
-
-export function resolveSave(party: Party): Promise<Save> {
-	const partyRef = db.ref(`saves/${party._saveRef}`);
+export function resolveParty(partyId: string): Promise<Party> {
+	const partyRef = db.ref(`parties/${partyId}`);
 
 	return new Promise((resolve, reject) => {
 		partyRef.once('value', (snapshot) => {
