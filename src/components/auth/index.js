@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { auth, isAuthenticated } from '../../firebase';
+import { isAuthenticated } from '../../firebase';
 
 import { getDisplayName } from '../../utils/debug';
 
-import withGameData from '../../utils/gameDataProxy';
+import resolveGameData from '../../utils/gameDataProxy';
 
 export const withUser = WrappedComponent =>
 	class extends Component {
 		static displayName = `withUser(${getDisplayName(WrappedComponent)})`;
 
 		state = {
-			user: null,
+			gameData: new Promise((resolve) => {
+				resolveGameData().then((gameData) => {
+					resolve(gameData);
+				});
+			}),
 		};
 
-		componentDidMount() {
-			auth.onAuthStateChanged((user) => {
-				this.setState({ user });
-			});
-		}
-
 		render() {
-			const { user } = this.state;
-			return <WrappedComponent {...this.props} gameData={withGameData(user)} />;
+			const { gameData } = this.state;
+			return <WrappedComponent {...this.props} gameData={gameData} />;
 		}
 	};
 

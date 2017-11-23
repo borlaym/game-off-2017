@@ -26,29 +26,15 @@ class GamePage extends React.Component<*, State> {
 		this.handleAction = this.handleAction.bind(this);
 	}
 	componentWillMount() {
-		const { history } = this.props;
-		if (!isAuthenticated()) {
-			history.push('/login');
-		}
-		auth.onAuthStateChanged((user) => {
-			if (user) {
-				resolveCharacter(user.uid)
-				.then((player) => {
-					resolveParty(player)
-						.then(party => {
-							this.setState({
-								character: player,
-								party,
-								save: party.save
-							});
-						});
-				})
-				.catch((err) => {
-					console.log(err);
-					history.push('/character/create')
+		this.props.gameData
+			.then((gameData) => gameData.party)
+			.then((party) => {
+				this.setState({
+					character: party.character,
+					party,
+					save: party.save
 				});
-			}
-		});
+			});
 	}
 	handleAction: ResultingAction => void;
 	handleAction(action: ResultingAction) {
@@ -60,8 +46,8 @@ class GamePage extends React.Component<*, State> {
 			party: this.state.party,
 			playerId: this.state.character._uid,
 		});
-		if (this.state.pary) {
-			takeAction(this.state.party._uid, gameState.player._uid, gameState.currentNode.id, action.id);
+		if (this.state.party) {
+			takeAction(this.state.character._partyRef, gameState.player._uid, gameState.currentNode.id, action.id);
 		}
 	}
 
