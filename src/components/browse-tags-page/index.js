@@ -15,10 +15,10 @@ export default class BrowseTagPage extends React.Component {
 		if (!this.state || !this.state.tags) {
 			return 'Loading...';
 		}
-		console.log(Object.keys(this.state.tags));
 		return (
 			<div>
 				<h3>Browse tags</h3>
+				<Link to="/admin/tags/create">Create Tag</Link>
 				<ul>
 					{Object.keys(this.state.tags).map(tag => (
 						<li>
