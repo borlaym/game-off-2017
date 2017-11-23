@@ -83,13 +83,23 @@ describe('resolveGameState', () => {
 				_actionID: '2',
 			},
 			save2: {
+				_nodeRef: 'starter-2',
+				_characterRef: 'player2',
+				_actionID: '1',
+			},
+			save3: {
 				_nodeRef: 'starter',
 				_characterRef: 'player1',
 				_actionID: '1',
 			},
-			save3: {
+			save4: {
 				_nodeRef: 'starter-2',
 				_characterRef: 'player1',
+				_actionID: '1',
+			},
+			save5: {
+				_nodeRef: 'starter-3',
+				_characterRef: 'player2',
 				_actionID: '1',
 			},
 		}));

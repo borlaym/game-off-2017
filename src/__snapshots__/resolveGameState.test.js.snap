@@ -24,8 +24,12 @@ CLERK LADY: Name.",
     "timestamp": 4102441322000,
   },
   Object {
-    "text": "You say your name",
+    "text": "<%=o.player.name%> says his name.",
     "timestamp": 4102441322001,
+  },
+  Object {
+    "text": "<%=o.player.name%> says his name.",
+    "timestamp": 4102441322002,
   },
 ]
 `;

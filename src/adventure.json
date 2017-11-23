@@ -71,7 +71,7 @@
 		"options": [{
 			"id": "1",
 			"text": "<%=o.self.name%>",
-			"logText": "You say your name",
+			"logText": "<%=o.player.name%> says his name.",
 			"conditions": [],
 			"globalConditions": [],
 			"resultingAction": {
@@ -84,6 +84,21 @@
 		"id": "starter-3",
 		"text": "I hope I get assigned to something good.",
 		"inGameTimestamp": "2100-01-01 00:02:02",
+		"options": [{
+				"id": "1",
+				"text": "I really hope.",
+				"conditions": [],
+				"globalConditions": [],
+				"resultingAction": {
+					"id": "1",
+					"targetNode": "starter-4"
+				}
+			}]
+	},
+	"starter-4": {
+		"id": "starter-4",
+		"text": "This is the test end node",
+		"inGameTimestamp": "2100-01-01 00:02:03",
 		"options": []
 	}
 }
