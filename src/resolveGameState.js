@@ -12,9 +12,7 @@ const resolveGameState = ({
 	playerId: string
 }): GameState => {
 	let globalTags: Array<Tag> = [];
-	const resolvedCharacters: Array<Character> = party.participants.map(c => ({
-		...c,
-	}));
+	const resolvedCharacters: Array<Character> = JSON.parse(JSON.stringify(party.participants));
 	let currentNode: Node = adventure.starter;
 	const player: ?Character = resolvedCharacters.find(_ => _._uid === playerId);
 	if (!player) {
