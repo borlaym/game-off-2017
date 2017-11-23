@@ -1,30 +1,26 @@
 import * as React from 'react';
 import NodeBuilder from '../node-builder';
-import firebase from '../../firebase';
+import { db } from '../../firebase';
 
 export default class NodePage extends React.Component {
-	constructor(props) {
-		super(props);
-		this.handleSave = this.handleSave.bind(this);
-	}
-
-	handleSave(nodeData) {
-		const db = firebase.database();
+	static handleSave(nodeData) {
 		db.ref(`nodes/${nodeData.name}`).set(nodeData);
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		if (this.props && this.props.node) {
 			this.setState({
-				loading: true
+				loading: true,
 			});
-			const db = firebase.database();
-			db.ref(`nodes/${this.props.node}`).once('value').then((snapshot) => {
-				this.setState({
-					node: snapshot.val(),
-					loading: false
+			db
+				.ref(`nodes/${this.props.node}`)
+				.once('value')
+				.then((snapshot) => {
+					this.setState({
+						node: snapshot.val(),
+						loading: false,
+					});
 				});
-			});
 		}
 	}
 
@@ -36,7 +32,7 @@ export default class NodePage extends React.Component {
 		return (
 			<div>
 				<h3>Node page</h3>
-				<NodeBuilder onSave={this.handleSave} {...nodeData} />
+				<NodeBuilder onSave={NodePage.handleSave} {...nodeData} />
 			</div>
 		);
 	}

@@ -8,8 +8,8 @@ export default ({
 	option,
 	character,
 	globalTags = [],
-	onSelect
-}:{
+	onSelect,
+}: {
 	option: Option,
 	character: Character,
 	globalTags: Array<Tag>,
@@ -17,7 +17,7 @@ export default ({
 }) => {
 	const {
 		text,
-		conditions
+		conditions,
 	} = option;
 	const visibleTags = conditions
 		.filter(_ => _.visibility !== 'HIDDEN')
@@ -25,13 +25,13 @@ export default ({
 		.join(' and ');
 	const resolveText = textResolver(globalTags, character);
 	return (
-		<div className='event-node__option' onClick={_ => onSelect(option)}>
-			<p className='event-node__option__condition'>
+		<div className="event-node__option" onClick={_ => onSelect(option)}>
+			<p className="event-node__option__condition">
 				{visibleTags}
 			</p>
-			<p className='event-node__option__text'>
+			<p className="event-node__option__text">
 				{resolveText(text)}
 			</p>
 		</div>
-	)
-}
+	);
+};

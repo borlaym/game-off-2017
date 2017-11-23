@@ -1,24 +1,35 @@
-import * as React from 'react';
+import React, { Component } from 'react';
+
+import { withRouter } from 'react-router-dom';
+
 import FlatButton from 'material-ui/FlatButton';
 
-import firebase from '../../firebase';
+import { auth, authProvider, isAuthenticated } from '../../firebase';
 
-export default class LoginPage extends React.Component {
-	static displayName = LoginPage;
-	
+class LoginPage extends Component {
+	static displayName = 'LoginPage';
+
 	constructor(props) {
 		super(props);
+
 		this.authenticate = this.authenticate.bind(this);
 	}
 
+	componentWillMount() {
+		const { history } = this.props;
+
+		if (isAuthenticated()) {
+			history.push('/');
+		}
+	}
+
 	authenticate() {
-		const provider = new firebase.auth.GoogleAuthProvider();
-		firebase
-			.auth()
-			.signInWithPopup(provider)
-			.catch(function(error) {
-				console.error(error);
-			});
+		const { history } = this.props;
+		const provider = new authProvider.GoogleAuthProvider();
+
+		auth.signInWithPopup(provider)
+			.then(() => history.push('/'))
+			.catch(error => console.error(error));
 	}
 
 	render() {
@@ -30,3 +41,5 @@ export default class LoginPage extends React.Component {
 		);
 	}
 }
+
+export default withRouter(LoginPage);

@@ -2,6 +2,15 @@
 
 export type Visibility = 'public' | 'private' | 'hidden';
 
+export type Tag = {
+	name: string,
+	text: string,
+	gainsText?: string,
+	losesText?: string,
+	visibility: Visibility,
+	modifiers: { [string]: number }
+};
+
 export type Character = {
 	id: string,
 	name: string,
@@ -14,18 +23,9 @@ export type Character = {
 	}
 };
 
-export type Tag = {
-	name: string,
-	text: string,
-	gainsText?: string,
-	losesText?: string,
-	visibility : Visibility,
-	modifiers: { [string]: number }
-};
-
 export type TargetedTag = {
 	target: 'SELF' | 'GLOBAL',
-	tag : Tag
+	tag: Tag
 };
 
 export type ResultingAction = {

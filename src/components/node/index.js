@@ -11,8 +11,8 @@ export default ({
 	character,
 	globalTags,
 	onAction,
-	resolution
-}:{
+	resolution,
+}: {
 	node: Node,
 	character: Character,
 	globalTags: Array<Tag>,
@@ -21,9 +21,9 @@ export default ({
 }) => {
 	const {
 		text,
-		options
+		options,
 	} = node;
-	const visibleOptions = options.filter(option => {
+	const visibleOptions = options.filter((option) => {
 		const fullfillsGlobalCondition =
 			option.globalConditions.length === 0 ||
 			intersection(globalTags.map(_ => _.name), option.globalConditions.map(_ => _.name)).length > 0;
@@ -34,16 +34,16 @@ export default ({
 	});
 	const resolveText = textResolver(globalTags, character);
 	return (
-		<div className='event-node'>
-			<div className='event-node__text'>
+		<div className="event-node">
+			<div className="event-node__text">
 				{resolveText(text)}
 			</div>
 			{ resolution ? (
-				<div className='event-node__result'>
+				<div className="event-node__result">
 					{resolveText(resolution.logText)}
 				</div>
 			) : (
-				<div className='event-node__options'>
+				<div className="event-node__options">
 					{visibleOptions.map(option => (
 						<OptionComponent
 							key={option.id}
@@ -56,5 +56,5 @@ export default ({
 				</div>
 			)}
 		</div>
-	)
-}
+	);
+};

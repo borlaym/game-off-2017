@@ -14,7 +14,7 @@ export default class TagBuilder extends React.Component {
 			gainsText: props.gainsText || '',
 			losesText: props.losesText || '',
 			visibility: props.visibility || 'PUBLIC',
-			notes: props.notes || ''
+			notes: props.notes || '',
 		};
 		Object.keys(this.state).forEach((key) => {
 			const capitalized = `${key[0].toUpperCase()}${key.substr(1)}`;
@@ -25,7 +25,7 @@ export default class TagBuilder extends React.Component {
 
 	handleChange(key, event) {
 		this.setState({
-			[key]: event.target.value
+			[key]: event.target.value,
 		});
 	}
 
