@@ -5,20 +5,18 @@ import adventure from './adventure.json';
 
 const defaultValue = {
 	adventure,
-	party: {
-		save: {},
-		participants: [{
-			_uid: 'player1',
-			name: 'Player One',
-			tags: [],
-			_partyRef: 'party1',
-		}, {
-			_uid: 'player2',
-			name: 'Player Two',
-			tags: [],
-			_partyRef: 'party1',
-		}],
-	},
+	save: {},
+	participants: [{
+		_uid: 'player1',
+		name: 'Player One',
+		tags: [],
+		_partyRef: 'party1',
+	}, {
+		_uid: 'player2',
+		name: 'Player Two',
+		tags: [],
+		_partyRef: 'party1',
+	}],
 	playerId: 'player1',
 };
 
@@ -28,10 +26,7 @@ const defaultValue = {
  */
 const valueWithSave = save => ({
 	...defaultValue,
-	party: {
-		...defaultValue.party,
-		save,
-	},
+	save,
 });
 
 describe('resolveGameState', () => {

@@ -1,35 +1,37 @@
 // @flow
 
-import type { Party, Character, Adventure, GameState, Tag, SaveStep, Option, ResultingAction, LogEntry } from './types';
+import type { Save, Character, Adventure, GameState, Tag, SaveStep, Option, ResultingAction, LogEntry } from './types';
 
 const resolveGameState = ({
 	adventure,
-	party,
+	participants,
+	save,
 	playerId,
 }: {
 	adventure: Adventure,
-	party: Party,
+	participants: Array<Character>,
+	save: Save,
 	playerId: string
 }): GameState => {
 	let globalTags: Array<Tag> = [];
-	const resolvedCharacters: Array<Character> = JSON.parse(JSON.stringify(party.participants));
-	resolvedCharacters.forEach((_) => {
+	const resolvedParticipants: Array<Character> = JSON.parse(JSON.stringify(participants));
+	resolvedParticipants.forEach((_) => {
 		if (!_.tags) {
 			_.tags = [];
 		}
 	});
 	let currentNode: Node = adventure.starter;
-	const log = [];
-	const player: ?Character = resolvedCharacters.find(_ => _._uid === playerId);
+	const log: Array<LogEntry> = [];
+	const player: ?Character = resolvedParticipants.find(_ => _._uid === playerId);
 	if (!player) {
 		throw new Error('Player not found');
 	}
-	Object.keys(party.save || {}).forEach((saveKey: string) => {
+	Object.keys(save || {}).forEach((saveKey: string) => {
 		// Iterate through all save steps
-		const saveStep: SaveStep = party.save[saveKey];
+		const saveStep: SaveStep = save[saveKey];
 		const node = adventure[saveStep._nodeRef];
 		const actingPlayer: ?Character =
-			resolvedCharacters.find(_ => _._uid === saveStep._characterRef);
+			resolvedParticipants.find(_ => _._uid === saveStep._characterRef);
 		if (!actingPlayer) {
 			throw new Error('Player not found');
 		}
@@ -74,11 +76,11 @@ const resolveGameState = ({
 				timestamp,
 			});
 			// Add all player interactions on this node to the log
-			const saveSteps: Array<SaveStep> = Object.keys(party.save).map(_ => party.save[_]);
+			const saveSteps: Array<SaveStep> = Object.keys(save).map(_ => save[_]);
 			const allPlayerSavesOnThisNode = saveSteps.filter(_ => _._nodeRef === node.id);
 			const logEntries: Array<LogEntry> =
-				allPlayerSavesOnThisNode.map((save: SaveStep, index: number) => {
-					const action: ResultingAction = allActions.find(_ => _.id === save._actionID);
+				allPlayerSavesOnThisNode.map((currentSaveStep: SaveStep, index: number) => {
+					const action: ResultingAction = allActions.find(_ => _.id === currentSaveStep._actionID);
 					const option: Option = node.options.find(_ => _.resultingAction.id === action.id);
 					return {
 						text: option.logText || option.text,
@@ -90,7 +92,7 @@ const resolveGameState = ({
 	});
 	return {
 		globalTags,
-		characters: resolvedCharacters,
+		characters: resolvedParticipants,
 		player,
 		currentNode,
 		log,
