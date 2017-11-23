@@ -83,23 +83,23 @@ export default class TagBuilder extends React.Component<Props, Tag> {
 			<Grid container>
 				<Grid item xs={12}>
 					<Typography type="subheading">ID</Typography>
-					<TextField value={this.state.id} onChange={this.handleIdChange} />
+					<TextField value={this.state.id} onChange={this.handleIdChange} fullWidth />
 				</Grid>
 				<Grid item xs={12}>
 					<Typography type="subheading">Name</Typography>
-					<TextField value={this.state.name} onChange={this.handleNameChange} />
+					<TextField value={this.state.name} onChange={this.handleNameChange} fullWidth />
 				</Grid>
 				<Grid item xs={12}>
 					<Typography type="subheading">Description</Typography>
-					<TextField value={this.state.description} onChange={this.handleDescriptionChange} />
+					<TextField value={this.state.description} onChange={this.handleDescriptionChange} fullWidth multiline rows={5} />
 				</Grid>
 				<Grid item xs={12}>
 					<Typography type="subheading">Gains Text</Typography>
-					<TextField value={this.state.gainsText} onChange={this.handleGainsTextChange} />
+					<TextField value={this.state.gainsText} onChange={this.handleGainsTextChange} fullWidth />
 				</Grid>
 				<Grid item xs={12}>
 					<Typography type="subheading">Loses Text</Typography>
-					<TextField value={this.state.losesText} onChange={this.handleLosesTextChange} />
+					<TextField value={this.state.losesText} onChange={this.handleLosesTextChange} fullWidth />
 				</Grid>
 				<Grid item xs={12}>
 					<Typography type="subheading">Visibility</Typography>
