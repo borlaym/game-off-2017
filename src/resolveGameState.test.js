@@ -9,7 +9,12 @@ const defaultValue = {
 		save: {},
 		participants: [{
 			_uid: 'player1',
-			name: 'Player',
+			name: 'Player One',
+			tags: [],
+			_partyRef: 'party1',
+		}, {
+			_uid: 'player2',
+			name: 'Player Two',
 			tags: [],
 			_partyRef: 'party1',
 		}],
@@ -43,7 +48,7 @@ describe('resolveGameState', () => {
 				_actionID: '1',
 			},
 		}));
-		expect(gameState.player).toMatchSnapshot();
+		expect(gameState.characters).toMatchSnapshot();
 		expect(gameState.currentNode.id).toMatchSnapshot();
 	});
 });
