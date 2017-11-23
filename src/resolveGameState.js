@@ -2,8 +2,6 @@
 
 import type { Party, Character, Adventure, GameState, Tag, SaveStep } from './types';
 
-const getPlayer = (characters: Array<Character>, playerId: string): Character => characters.find(_ => _._uid === playerId);
-
 const resolveGameState = ({
 	adventure,
 	party,
@@ -18,7 +16,7 @@ const resolveGameState = ({
 		...c,
 	}));
 	let currentNode: Node = adventure.starter;
-	const player = getPlayer(resolvedCharacters, playerId);
+	const player = resolvedCharacters.find(_ => _._uid === playerId);
 	Object.keys(party.save).forEach((saveKey: string) => {
 		// Iterate through all save steps
 		const saveStep: SaveStep = party.save[saveKey];
