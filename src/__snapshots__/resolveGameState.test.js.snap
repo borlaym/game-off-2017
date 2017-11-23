@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`resolveGameState correct log is calculated based on what the player can see 1`] = `
+exports[`resolveGameState correct log is calculated 1`] = `
 Array [
   Object {
     "text": "Fury Station is a crowded cesspool today. Just like any other day.
@@ -9,8 +9,12 @@ The line at the employment office is long enough that you start daydreaming abou
     "timestamp": 4102441321000,
   },
   Object {
-    "text": "Growing up on Earth was nice… at least before the radiation sickness took Mom and Dad.",
+    "text": "It was fun living here on Fury Station when I was a kid. The Divine Order was strict, but at least they kept the place tidy and safe.",
     "timestamp": 4102441321001,
+  },
+  Object {
+    "text": "Growing up on Earth was nice… at least before the radiation sickness took Mom and Dad.",
+    "timestamp": 4102441321002,
   },
   Object {
     "text": "NPC: Buddy. Hey! You’re up.

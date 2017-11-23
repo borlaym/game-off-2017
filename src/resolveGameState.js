@@ -1,6 +1,6 @@
 // @flow
 
-import type { Party, Character, Adventure, GameState, Tag, SaveStep, Option, ResultingAction } from './types';
+import type { Party, Character, Adventure, GameState, Tag, SaveStep, Option, ResultingAction, LogEntry } from './types';
 import findLast from 'lodash/findLast';
 
 const resolveGameState = ({
@@ -29,7 +29,7 @@ const resolveGameState = ({
 		if (!actingPlayer) {
 			throw new Error('Player not found');
 		}
-		const allActions = node.options.reduce((acc, option) => [
+		const allActions: Array<ResultingAction> = node.options.reduce((acc, option) => [
 			...acc,
 			option.resultingAction,
 		], []);
@@ -69,10 +69,19 @@ const resolveGameState = ({
 				text: node.text,
 				timestamp,
 			});
-			log.push({
-				text: takenOption.logText || takenOption.text,
-				timestamp: timestamp + 1,
-			});
+			// Add all player interactions on this node to the log
+			const saveSteps: Array<SaveStep> = Object.keys(party.save).map(_ => party.save[_]);
+			const allPlayerSavesOnThisNode = saveSteps.filter(_ => _._nodeRef === node.id);
+			const logEntries: Array<LogEntry> =
+				allPlayerSavesOnThisNode.map((save: SaveStep, index: number) => {
+					const action: ResultingAction = allActions.find(_ => _.id === save._actionID);
+					const option: Option = node.options.find(_ => _.resultingAction.id === action.id);
+					return {
+						text: option.logText || option.text,
+						timestamp: timestamp + (index + 1),
+					};
+				});
+			logEntries.forEach(_ => log.push(_));
 		}
 	});
 	return {

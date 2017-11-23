@@ -75,7 +75,7 @@ describe('resolveGameState', () => {
 		expect(gameState.currentNode.id).toMatchSnapshot();
 	});
 
-	it('correct log is calculated based on what the player can see', () => {
+	it('correct log is calculated', () => {
 		const gameState = resolveGameState(valueWithSave({
 			save1: {
 				_nodeRef: 'starter',
