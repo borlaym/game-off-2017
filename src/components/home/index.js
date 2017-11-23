@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { auth, isAuthenticated } from '../../firebase';
-import withGameData from '../../utils/gameDataProxy';
+import { isAuthenticated } from '../../firebase';
+import resolveGameData from '../../utils/gameDataProxy';
 
 class Home extends Component {
 	static displayName = 'App';
@@ -14,16 +14,12 @@ class Home extends Component {
 			history.push('/login');
 		}
 
-		auth.onAuthStateChanged((user) => {
-			if (user) {
-				const gameData = withGameData(user);
-
-				gameData.character
-					.then((character) => {
-						console.log(character);
-					})
-					.catch(() => history.push('/character/create'));
-			}
+		resolveGameData().then((gameData) => {
+			gameData.character
+				.then((character) => {
+					console.log(character);
+				})
+				.catch(() => history.push('/character/create'));
 		});
 	}
 

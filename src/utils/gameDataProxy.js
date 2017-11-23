@@ -1,29 +1,64 @@
-import { resolveCharacter } from './api';
+import { resolveCharacter, resolveParty } from './api';
 
-const handler = {
-	get(target, name) {
-		if (name in target) {
-			return target[name];
-		}
+import { auth, isAuthenticated } from '../firebase';
 
-		switch (name) {
-			case 'character': {
-				const { uid } = target.user;
-				return resolveCharacter(uid);
-			}
-			default: return new Proxy({}, handler);
-		}
-	},
-};
-
-export default (object) => {
-	if (!object) {
-		return new Proxy({}, handler);
+class GameData {
+	constructor(user) {
+		this.user = user;
 	}
 
-	if (Object.prototype.hasOwnProperty.call(object, 'uid')) {
-		return new Proxy({ user: object }, handler);
+	set character(character) {
+		this._character = character;
 	}
 
-	throw new Error('For now let\'s just wrap the user');
-};
+	get character() {
+		const { uid } = this.user;
+		return !this._character
+			? resolveCharacter(uid).then((character) => {
+				this.character = character;
+				return character;
+			})
+			: Promise.resolve(this._character);
+	}
+
+	set party(party) {
+		this._party = party;
+	}
+
+	get party() {
+		return !this._party
+			? this.character
+				.then(character => resolveParty(character._partyRef).then(party => ({ party, character })))
+				.then(({ party, character }) => {
+					return Promise.all(party.participants.map(resolveCharacter))
+						.then((participants) => {
+							return {
+								party: {
+									...party,
+									participants,
+								},
+								character,
+							};
+						});
+				})
+				.then(({ party, character }) => {
+					this.party = {
+						...party,
+						character,
+					};
+					return this.party;
+				})
+			: Promise.resolve(this._party);
+	}
+}
+
+export default () =>
+	new Promise((resolve, reject) => {
+		if (isAuthenticated()) {
+			auth.onAuthStateChanged((user) => {
+				resolve(new GameData(user));
+			});
+		} else {
+			reject(new Error('401 UNAUTHORIZED'));
+		}
+	});
