@@ -17,6 +17,9 @@
 					"gainTags": [{
 						"target": "SELF",
 						"tag": "BORN ON EARTH"
+					}, {
+						"target": "GLOBAL",
+						"tag": "EARTH DESTROYED"
 					}],
 					"loseTags": []
 				}

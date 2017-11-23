@@ -45,10 +45,22 @@ describe('resolveGameState', () => {
 			save1: {
 				_nodeRef: 'starter',
 				_characterRef: 'player1',
-				_actionID: '1',
+				_actionID: '2',
 			},
 		}));
 		expect(gameState.characters).toMatchSnapshot();
 		expect(gameState.currentNode.id).toMatchSnapshot();
+	});
+
+	it('resolves an action that gives a global tag as well', () => {
+		const gameState = resolveGameState(valueWithSave({
+			save1: {
+				_nodeRef: 'starter',
+				_characterRef: 'player1',
+				_actionID: '1',
+			},
+		}));
+		expect(gameState.characters).toMatchSnapshot();
+		expect(gameState.globalTags).toMatchSnapshot();
 	});
 });

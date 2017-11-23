@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`resolveGameState resolves an action that gives a tag 1`] = `
+exports[`resolveGameState resolves an action that gives a global tag as well 1`] = `
 Array [
   Object {
     "_partyRef": "party1",
@@ -8,6 +8,31 @@ Array [
     "name": "Player One",
     "tags": Array [
       "BORN ON EARTH",
+    ],
+  },
+  Object {
+    "_partyRef": "party1",
+    "_uid": "player2",
+    "name": "Player Two",
+    "tags": Array [],
+  },
+]
+`;
+
+exports[`resolveGameState resolves an action that gives a global tag as well 2`] = `
+Array [
+  "EARTH DESTROYED",
+]
+`;
+
+exports[`resolveGameState resolves an action that gives a tag 1`] = `
+Array [
+  Object {
+    "_partyRef": "party1",
+    "_uid": "player1",
+    "name": "Player One",
+    "tags": Array [
+      "RAISED BY DIVINE ORDER",
     ],
   },
   Object {
@@ -52,6 +77,10 @@ Object {
               Object {
                 "tag": "BORN ON EARTH",
                 "target": "SELF",
+              },
+              Object {
+                "tag": "EARTH DESTROYED",
+                "target": "GLOBAL",
               },
             ],
             "loseTags": Array [],
