@@ -24,6 +24,10 @@ const resolveGameState = ({
 		// Iterate through all save steps
 		const saveStep: SaveStep = party.save[saveKey];
 		const node = adventure[saveStep._nodeRef];
+		const actingPlayer: ?Character = resolvedCharacters.find(_ => _._uid === saveStep._characterRef);
+		if (!actingPlayer) {
+			throw new Error('Player not found');
+		}
 		const allActions = node.options.reduce((acc, option) => [
 			...acc,
 			option.resultingAction,
@@ -36,7 +40,7 @@ const resolveGameState = ({
 		if (takenAction.effects) {
 			(takenAction.effects.gainTags || []).forEach((effect) => {
 				if (effect.target.toLowerCase() === 'self') {
-					player.tags.push(effect.tag);
+					actingPlayer.tags.push(effect.tag);
 				} else {
 					globalTags.push(effect.tag);
 				}
@@ -45,7 +49,7 @@ const resolveGameState = ({
 		if (takenAction.effects) {
 			(takenAction.effects.loseTags || []).forEach((effect) => {
 				if (effect.target.toLowerCase() === 'self') {
-					player.tags = player.tags.filter(_ => _ !== effect.tag);
+					actingPlayer.tags = actingPlayer.tags.filter(_ => _ !== effect.tag);
 				} else {
 					globalTags = globalTags.filter(_ => _ !== effect.tag);
 				}

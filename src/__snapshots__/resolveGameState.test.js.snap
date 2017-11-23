@@ -1,14 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`resolveGameState resolves an action that gives a tag 1`] = `
-Object {
-  "_partyRef": "party1",
-  "_uid": "player1",
-  "name": "Player",
-  "tags": Array [
-    "BORN ON EARTH",
-  ],
-}
+Array [
+  Object {
+    "_partyRef": "party1",
+    "_uid": "player1",
+    "name": "Player One",
+    "tags": Array [
+      "BORN ON EARTH",
+    ],
+  },
+  Object {
+    "_partyRef": "party1",
+    "_uid": "player2",
+    "name": "Player Two",
+    "tags": Array [],
+  },
+]
 `;
 
 exports[`resolveGameState resolves an action that gives a tag 2`] = `"starter-2"`;
@@ -19,7 +27,13 @@ Object {
     Object {
       "_partyRef": "party1",
       "_uid": "player1",
-      "name": "Player",
+      "name": "Player One",
+      "tags": Array [],
+    },
+    Object {
+      "_partyRef": "party1",
+      "_uid": "player2",
+      "name": "Player Two",
       "tags": Array [],
     },
   ],
@@ -94,7 +108,7 @@ The line at the employment office is long enough that you start daydreaming abou
   "player": Object {
     "_partyRef": "party1",
     "_uid": "player1",
-    "name": "Player",
+    "name": "Player One",
     "tags": Array [],
   },
 }
