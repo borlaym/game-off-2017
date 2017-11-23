@@ -14,7 +14,7 @@
 				"targetNode": "starter-2",
 				"effects": {
 					"gainTags": [{
-						"target": "Self",
+						"target": "SELF",
 						"tag": "BORN ON EARTH"
 					}],
 					"loseTags": []
@@ -32,7 +32,7 @@
 				"effects": {
 					"gainTags": [
 						{
-							"target": "Self",
+							"target": "SELF",
 							"tag": "RAISED BY DIVINE ORDER"
 						}
 					],
@@ -51,7 +51,7 @@
 				"effects": {
 					"gainTags": [
 						{
-							"target": "Self",
+							"target": "SELF",
 							"tag": "BORN ON A SHIP"
 						}
 					],
