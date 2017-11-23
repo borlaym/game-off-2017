@@ -63,4 +63,15 @@ describe('resolveGameState', () => {
 		expect(gameState.characters).toMatchSnapshot();
 		expect(gameState.globalTags).toMatchSnapshot();
 	});
+
+	it('current node is calculated for the current player, not for all players', () => {
+		const gameState = resolveGameState(valueWithSave({
+			save1: {
+				_nodeRef: 'starter',
+				_characterRef: 'player2',
+				_actionID: '1',
+			},
+		}));
+		expect(gameState.currentNode.id).toMatchSnapshot();
+	});
 });

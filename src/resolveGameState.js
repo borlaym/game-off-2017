@@ -53,8 +53,10 @@ const resolveGameState = ({
 				}
 			});
 		}
-		// Set next node
-		currentNode = adventure[takenAction.targetNode];
+		// Set next node if the action was taken by the current player
+		if (actingPlayer === player) {
+			currentNode = adventure[takenAction.targetNode];
+		}
 	});
 	return {
 		globalTags,

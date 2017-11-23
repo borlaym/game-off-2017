@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`resolveGameState current node is calculated for the current player, not for all players 1`] = `"starter"`;
+
 exports[`resolveGameState resolves an action that gives a global tag as well 1`] = `
 Array [
   Object {
