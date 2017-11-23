@@ -18,6 +18,11 @@ type State = {
 class GamePage extends React.Component<*, State> {
 	constructor(props) {
 		super(props);
+		this.state = {
+			character: null,
+			party: null,
+			save: null,
+		};
 		this.handleAction = this.handleAction.bind(this);
 	}
 	componentWillMount() {

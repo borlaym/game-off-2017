@@ -1,7 +1,6 @@
 // @flow
 
 import type { Party, Character, Adventure, GameState, Tag, SaveStep, Option, ResultingAction, LogEntry } from './types';
-import findLast from 'lodash/findLast';
 
 const resolveGameState = ({
 	adventure,
