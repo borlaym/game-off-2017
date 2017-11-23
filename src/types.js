@@ -57,12 +57,6 @@ export type Node = {
 	options: Array<Option>
 };
 
-export type Party = {
-	_adventureRef: string,
-	_saveRef: string,
-	participants: Array<Character>
-}
-
 export type SaveStep = {
 	_nodeRef: string,
 	_characterRef: string,
@@ -70,3 +64,20 @@ export type SaveStep = {
 };
 
 export type Save = Array<SaveStep>;
+
+export type Party = {
+	_adventureRef: string,
+	save: Save,
+	participants: Array<Character>
+}
+
+export type Adventure = {
+	[string]: Node
+};
+
+export type GameState = {
+	globalTags: Array<Tag>,
+	characters: Array<Character>,
+	player: Character,
+	currentNode: Node
+};
