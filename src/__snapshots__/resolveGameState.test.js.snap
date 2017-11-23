@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`resolveGameState resolves an action that gives a tag 1`] = `
+Object {
+  "_partyRef": "party1",
+  "_uid": "player1",
+  "name": "Player",
+  "tags": Array [
+    "BORN ON EARTH",
+  ],
+}
+`;
+
+exports[`resolveGameState resolves an action that gives a tag 2`] = `"starter-2"`;
+
+exports[`resolveGameState returns the base game state 1`] = `
+Object {
+  "characters": Array [
+    Object {
+      "_partyRef": "party1",
+      "_uid": "player1",
+      "name": "Player",
+      "tags": Array [],
+    },
+  ],
+  "currentNode": Object {
+    "blocker": false,
+    "id": "starter",
+    "inGameTimestamp": "2100-01-01 00:00:01",
+    "options": Array [
+      Object {
+        "conditions": Array [],
+        "globalConditions": Array [],
+        "id": "1",
+        "resultingAction": Object {
+          "effects": Object {
+            "gainTags": Array [
+              Object {
+                "tag": "BORN ON EARTH",
+                "target": "SELF",
+              },
+            ],
+            "loseTags": Array [],
+          },
+          "id": "1",
+          "targetNode": "starter-2",
+        },
+        "text": "Growing up on Earth was nice… at least before the radiation sickness took Mom and Dad.",
+      },
+      Object {
+        "conditions": Array [],
+        "globalConditions": Array [],
+        "id": "2",
+        "resultingAction": Object {
+          "effects": Object {
+            "gainTags": Array [
+              Object {
+                "tag": "RAISED BY DIVINE ORDER",
+                "target": "SELF",
+              },
+            ],
+            "loseTags": Array [],
+          },
+          "id": "2",
+          "targetNode": "starter-2",
+        },
+        "text": "It was fun living here on Fury Station when I was a kid. The Divine Order was strict, but at least they kept the place tidy and safe.",
+      },
+      Object {
+        "conditions": Array [],
+        "globalConditions": Array [],
+        "id": "3",
+        "resultingAction": Object {
+          "effects": Object {
+            "gainTags": Array [
+              Object {
+                "tag": "BORN ON A SHIP",
+                "target": "SELF",
+              },
+            ],
+            "loseTags": Array [],
+          },
+          "id": "3",
+          "targetNode": "starter-2",
+        },
+        "text": "I’m glad I was born on a ship. Back then, we were free, the solar wind at our backs.",
+      },
+    ],
+    "text": "Fury Station is a crowded cesspool today. Just like any other day.
+The sound of distant PA announcements echo through the hall, and the chatter in dozens of languages merge into a soft, comforting murmur.
+The line at the employment office is long enough that you start daydreaming about better times.",
+  },
+  "globalTags": Array [],
+  "player": Object {
+    "_partyRef": "party1",
+    "_uid": "player1",
+    "name": "Player",
+    "tags": Array [],
+  },
+}
+`;

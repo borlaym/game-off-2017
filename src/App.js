@@ -11,6 +11,7 @@ import './App.css';
 
 import AdminPage from './components/admin-page';
 import TagPage from './components/tag-page';
+import GamePage from './components/game-page';
 import NodePage from './components/node-page';
 import BrowseTagsPage from './components/browse-tags-page';
 import CharacterProfile from './components/character/profile';
@@ -33,6 +34,11 @@ function App() {
 						exact
 						path="/logout"
 						component={LogoutPage}
+					/>
+					<RouteWithAuth
+						exact
+						path="/game"
+						component={GamePage}
 					/>
 					<Route exact path="/login" component={LoginPage} />
 					<RouteWithAuth

@@ -12,15 +12,10 @@ export type Tag = {
 };
 
 export type Character = {
-	id: string,
+	_uid: string,
 	name: string,
 	tags: Array<Tag>,
-	skills: {
-		COMBAT: number,
-		SOCIAL: number,
-		WITS: number,
-		SCIENCE: number
-	}
+	_partyRef: string
 };
 
 export type TargetedTag = {
@@ -31,7 +26,7 @@ export type TargetedTag = {
 export type ResultingAction = {
 	id: string,
 	targetNode: string,
-	effects: {
+	effects?: {
 		gainTags?: Array<TargetedTag>,
 		loseTags?: Array<TargetedTag>
 	}
@@ -39,11 +34,11 @@ export type ResultingAction = {
 
 export type Option = {
 	id: string,
-	conditions: Array<string>,
-	globalConditions: Array<string>,
+	conditions?: Array<string>,
+	globalConditions?: Array<string>,
 	skillCheck?: { [string]: number },
 	text: string,
-	logText: string,
+	logText?: string,
 	resultingAction: ResultingAction,
 	failedResultingAction?: ResultingAction
 };
@@ -54,4 +49,29 @@ export type Node = {
 	blocker?: boolean,
 	inGameTimestamp: string,
 	options: Array<Option>
+};
+
+export type SaveStep = {
+	_nodeRef: string,
+	_characterRef: string,
+	_actionID: string
+};
+
+export type Save = { [string]: SaveStep };
+
+export type Party = {
+	save: Save,
+	participants: Array<Character>
+};
+
+export type Adventure = {
+	starter: Node,
+	[string]: Node
+};
+
+export type GameState = {
+	globalTags: Array<Tag>,
+	characters: Array<Character>,
+	player: Character,
+	currentNode: Node
 };

@@ -1,18 +1,21 @@
-[
-	{
+{
+	"starter": {
 	"id": "starter",
+	"blocker": false,
 	"text": "Fury Station is a crowded cesspool today. Just like any other day.\nThe sound of distant PA announcements echo through the hall, and the chatter in dozens of languages merge into a soft, comforting murmur.\nThe line at the employment office is long enough that you start daydreaming about better times.",
 	"inGameTimestamp": "2100-01-01 00:00:01",
 	"options": [
 		{
-			"id": 1,
+			"id": "1",
+			"conditions": [],
+			"globalConditions": [],
 			"text": "Growing up on Earth was nice… at least before the radiation sickness took Mom and Dad.",
 			"resultingAction": {
-				"id": 1,
+				"id": "1",
 				"targetNode": "starter-2",
 				"effects": {
 					"gainTags": [{
-						"target": "Self",
+						"target": "SELF",
 						"tag": "BORN ON EARTH"
 					}],
 					"loseTags": []
@@ -20,15 +23,17 @@
 			}
 		},
 		{
-			"id": 2,
+			"id": "2",
 			"text": "It was fun living here on Fury Station when I was a kid. The Divine Order was strict, but at least they kept the place tidy and safe.",
+			"conditions": [],
+			"globalConditions": [],
 			"resultingAction": {
-				"id": 2,
+				"id": "2",
 				"targetNode": "starter-2",
 				"effects": {
 					"gainTags": [
 						{
-							"target": "Self",
+							"target": "SELF",
 							"tag": "RAISED BY DIVINE ORDER"
 						}
 					],
@@ -37,15 +42,17 @@
 			}
 		},
 		{
-			"id": 3,
+			"id": "3",
 			"text": "I’m glad I was born on a ship. Back then, we were free, the solar wind at our backs.",
+			"conditions": [],
+			"globalConditions": [],
 			"resultingAction": {
-				"id": 3,
+				"id": "3",
 				"targetNode": "starter-2",
 				"effects": {
 					"gainTags": [
 						{
-							"target": "Self",
+							"target": "SELF",
 							"tag": "BORN ON A SHIP"
 						}
 					],
@@ -54,23 +61,25 @@
 			}
 		}
 	]},
-	{
+	"starter-2": {
 		"id": "starter-2",
 		"text": "NPC: Buddy. Hey! You’re up.\nCLERK LADY: You! Yeah,[short] [guy]. Stop wasting my time and get over here.\nYou walk over to the dirty desk and sit down on the uncomfortable, creaky stool. The clerk lady has wrinkles that only decades of constant grumpiness can explain. Her raspy voice is almost unintelligible through the speakers.\nCLERK LADY: Name.",
 		"inGameTimestamp": "2100-01-01 00:02:01",
 		"options": [{
-			"id": 1,
+			"id": "1",
 			"text": "<%=o.self.name%>",
+			"conditions": [],
+			"globalConditions": [],
 			"resultingAction": {
-				"id": 1,
+				"id": "1",
 				"targetNode": "starter-3"
 			}
 		}]
 	},
-	{
+	"starter-3": {
 		"id": "starter-3",
 		"text": "I hope I get assigned to something good.",
 		"inGameTimestamp": "2100-01-01 00:02:02",
 		"options": []
 	}
-]
+}

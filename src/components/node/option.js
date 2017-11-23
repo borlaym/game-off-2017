@@ -25,7 +25,7 @@ export default ({
 		.join(' and ');
 	const resolveText = textResolver(globalTags, character);
 	return (
-		<div className="event-node__option" onClick={_ => onSelect(option)}>
+		<div className="event-node__option" onClick={_ => onSelect(option.resultingAction)}>
 			<p className="event-node__option__condition">
 				{visibleTags}
 			</p>
