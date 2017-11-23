@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`resolve text Resolves XE, XYR, XYRS 1`] = `"Should he escape, we will be on his tail. Keep him locked up."`;
+
+exports[`resolve text Resolves XE, XYR, XYRS 2`] = `"Should she escape, we will be on her tail. Keep her locked up."`;
