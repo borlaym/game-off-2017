@@ -13,6 +13,7 @@ export type Tag = {
 
 export type Character = {
 	_partyRef: string,
+	_uid: string,
 	id: string,
 	name: string,
 	tags: Array<Tag>,
@@ -27,7 +28,7 @@ export type TargetedTag = {
 export type ResultingAction = {
 	id: string,
 	targetNode: string,
-	effects: {
+	effects?: {
 		gainTags?: Array<TargetedTag>,
 		loseTags?: Array<TargetedTag>
 	}
@@ -35,11 +36,11 @@ export type ResultingAction = {
 
 export type Option = {
 	id: string,
-	conditions: Array<string>,
-	globalConditions: Array<string>,
+	conditions?: Array<string>,
+	globalConditions?: Array<string>,
 	skillCheck?: { [string]: number },
 	text: string,
-	logText: string,
+	logText?: string,
 	resultingAction: ResultingAction,
 	failedResultingAction?: ResultingAction
 };
@@ -58,15 +59,15 @@ export type SaveStep = {
 	_actionID: string
 };
 
-export type Save = Array<SaveStep>;
+export type Save = { [string]: SaveStep };
 
 export type Party = {
-	_adventureRef: string,
 	save: Save,
 	participants: Array<Character>
-}
+};
 
 export type Adventure = {
+	starter: Node,
 	[string]: Node
 };
 

@@ -1,6 +1,7 @@
 {
 	"starter": {
 	"id": "starter",
+	"blocker": false,
 	"text": "Fury Station is a crowded cesspool today. Just like any other day.\nThe sound of distant PA announcements echo through the hall, and the chatter in dozens of languages merge into a soft, comforting murmur.\nThe line at the employment office is long enough that you start daydreaming about better times.",
 	"inGameTimestamp": "2100-01-01 00:00:01",
 	"options": [
