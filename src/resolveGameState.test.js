@@ -68,10 +68,31 @@ describe('resolveGameState', () => {
 		const gameState = resolveGameState(valueWithSave({
 			save1: {
 				_nodeRef: 'starter',
-				_characterRef: 'player2',
+				_characterRef: 'player2', // Note that in this case it's player 2 who takes the action
 				_actionID: '1',
 			},
 		}));
 		expect(gameState.currentNode.id).toMatchSnapshot();
+	});
+
+	it('correct log is calculated based on what the player can see', () => {
+		const gameState = resolveGameState(valueWithSave({
+			save1: {
+				_nodeRef: 'starter',
+				_characterRef: 'player2',
+				_actionID: '2',
+			},
+			save2: {
+				_nodeRef: 'starter',
+				_characterRef: 'player1',
+				_actionID: '1',
+			},
+			save3: {
+				_nodeRef: 'starter-2',
+				_characterRef: 'player1',
+				_actionID: '1',
+			},
+		}));
+		expect(gameState.log).toMatchSnapshot();
 	});
 });

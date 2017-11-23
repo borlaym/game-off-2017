@@ -71,6 +71,7 @@
 		"options": [{
 			"id": "1",
 			"text": "<%=o.self.name%>",
+			"logText": "You say your name",
 			"conditions": [],
 			"globalConditions": [],
 			"resultingAction": {
