@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { auth, isAuthenticated } from '../../firebase';
-import { resolveCharacter } from '../../utils/api';
+import withGameData from '../../utils/gameDataProxy';
 
 class Home extends Component {
 	static displayName = 'App';
@@ -16,7 +16,9 @@ class Home extends Component {
 
 		auth.onAuthStateChanged((user) => {
 			if (user) {
-				resolveCharacter(user.uid)
+				const gameData = withGameData(user);
+
+				gameData.character
 					.then((character) => {
 						console.log(character);
 					})

@@ -12,11 +12,11 @@ class CharacterProfile extends React.Component {
 	}
 
 	createDummyCharacter() {
-		const { user, history } = this.props;
+		const { gameData, history } = this.props;
 
-		createCharacter(user.uid, {
+		createCharacter(gameData.user.uid, {
 			id: '',
-			name: user.displayName,
+			name: gameData.user.displayName,
 			tags: [],
 			skills: {
 				COMBAT: 0,

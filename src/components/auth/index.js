@@ -5,6 +5,8 @@ import { auth, isAuthenticated } from '../../firebase';
 
 import { getDisplayName } from '../../utils/debug';
 
+import withGameData from '../../utils/gameDataProxy';
+
 export const withUser = WrappedComponent =>
 	class extends Component {
 		static displayName = `withUser(${getDisplayName(WrappedComponent)})`;
@@ -15,27 +17,22 @@ export const withUser = WrappedComponent =>
 
 		componentDidMount() {
 			auth.onAuthStateChanged((user) => {
-				if (user) {
-					const { uid, displayName } = user;
-					this.setState({ user: { uid, displayName } });
-				} else {
-					this.setState({ user: null });
-				}
+				this.setState({ user });
 			});
 		}
 
 		render() {
 			const { user } = this.state;
-			return <WrappedComponent {...this.props} user={user} />;
+			return <WrappedComponent {...this.props} gameData={withGameData(user)} />;
 		}
 	};
 
 function componentFunction(props, renderProps) {
-	const { component: WrappedComponent, render, user } = props;
+	const { component: WrappedComponent, render, gameData } = props;
 	return WrappedComponent ? (
-		<WrappedComponent {...renderProps} user={user} />
+		<WrappedComponent {...renderProps} gameData={gameData} />
 	) : (
-		render({ user, ...renderProps })
+		render({ gameData, ...renderProps })
 	);
 }
 
@@ -54,7 +51,7 @@ function renderFunction(props, renderProps) {
 
 export const RouteWithAuth = withUser((props) => {
 	const {
-		component, render, user, ...routeProps
+		component, render, gameData, ...routeProps
 	} = props;
-	return <Route {...routeProps} render={() => renderFunction(props)} />;
+	return <Route {...routeProps} render={renderProps => renderFunction(props, renderProps)} />;
 });
