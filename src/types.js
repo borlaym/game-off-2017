@@ -71,9 +71,15 @@ export type Adventure = {
 	[string]: Node
 };
 
+export type LogEntry = {
+	text: string,
+	timestamp: number
+};
+
 export type GameState = {
 	globalTags: Array<Tag>,
 	characters: Array<Character>,
 	player: Character,
-	currentNode: Node
+	currentNode: Node,
+	log: Array<LogEntry>
 };

@@ -1,5 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`resolveGameState correct log is calculated 1`] = `
+Array [
+  Object {
+    "text": "Fury Station is a crowded cesspool today. Just like any other day.
+The sound of distant PA announcements echo through the hall, and the chatter in dozens of languages merge into a soft, comforting murmur.
+The line at the employment office is long enough that you start daydreaming about better times.",
+    "timestamp": 4102441321000,
+  },
+  Object {
+    "text": "It was fun living here on Fury Station when I was a kid. The Divine Order was strict, but at least they kept the place tidy and safe.",
+    "timestamp": 4102441321001,
+  },
+  Object {
+    "text": "Growing up on Earth was nice… at least before the radiation sickness took Mom and Dad.",
+    "timestamp": 4102441321002,
+  },
+  Object {
+    "text": "NPC: Buddy. Hey! You’re up.
+CLERK LADY: You! Yeah,[short] [guy]. Stop wasting my time and get over here.
+You walk over to the dirty desk and sit down on the uncomfortable, creaky stool. The clerk lady has wrinkles that only decades of constant grumpiness can explain. Her raspy voice is almost unintelligible through the speakers.
+CLERK LADY: Name.",
+    "timestamp": 4102441322000,
+  },
+  Object {
+    "text": "<%=o.player.name%> says his name.",
+    "timestamp": 4102441322001,
+  },
+  Object {
+    "text": "<%=o.player.name%> says his name.",
+    "timestamp": 4102441322002,
+  },
+]
+`;
+
 exports[`resolveGameState current node is calculated for the current player, not for all players 1`] = `"starter"`;
 
 exports[`resolveGameState resolves an action that gives a global tag as well 1`] = `
@@ -136,6 +170,7 @@ The sound of distant PA announcements echo through the hall, and the chatter in 
 The line at the employment office is long enough that you start daydreaming about better times.",
   },
   "globalTags": Array [],
+  "log": Array [],
   "player": Object {
     "_partyRef": "party1",
     "_uid": "player1",
