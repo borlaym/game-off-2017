@@ -12,6 +12,7 @@ export type Tag = {
 };
 
 export type Character = {
+	_partyRef: string,
 	id: string,
 	name: string,
 	tags: Array<Tag>,
@@ -50,3 +51,17 @@ export type Node = {
 	inGameTimestamp: string,
 	options: Array<Option>
 };
+
+export type Party = {
+	_adventureRef: string,
+	_saveRef: string,
+	participants: Array<Character>
+}
+
+export type SaveStep = {
+	_nodeRef: string,
+	_characterRef: string,
+	_actionID: string
+};
+
+export type Save = Array<SaveStep>;

@@ -1,7 +1,7 @@
 // @flow
 
 import { db } from '../firebase';
-import type { Character } from '../types';
+import type { Character, Party, Save } from '../types';
 
 export function createCharacter(userID: string, characterDetails: Character): Promise<Character> {
 	const dummyCharacter = {
@@ -30,5 +30,43 @@ export function resolveCharacter(userID: string): Promise<Character> {
 				reject();
 			}
 		});
+	});
+}
+
+export function resolveParty(character: Character): Promise<Party> {
+	const partyRef = db.ref(`parties/${character._partyRef}`);
+
+	return new Promise((resolve, reject) => {
+		partyRef.once('value', (snapshot) => {
+			if (snapshot.exists()) {
+				resolve(snapshot.val());
+			} else {
+				reject();
+			}
+		});
+	});
+}
+
+export function resolveSave(party: Party): Promise<Save> {
+	const partyRef = db.ref(`saves/${party._saveRef}`);
+
+	return new Promise((resolve, reject) => {
+		partyRef.once('value', (snapshot) => {
+			if (snapshot.exists()) {
+				resolve(snapshot.val());
+			} else {
+				reject();
+			}
+		});
+	});
+}
+
+export function takeAction(partyId: string, characterID: string, nodeID: string, actionID: string) {
+	const saveRef = db.ref(`parties/${partyId}/save`);
+	const newSaveStep = saveRef.push();
+	newSaveStep.set({
+		_nodeRef: nodeID,
+		_characterRef: characterID,
+		_actionID: actionID,
 	});
 }

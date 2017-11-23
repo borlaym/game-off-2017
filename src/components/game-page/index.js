@@ -4,9 +4,9 @@ import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import Node from '../node';
 import Advanture from '../../adventure.json';
-import { resolveCharacter } from '../../utils/api';
+import { resolveCharacter, takeAction } from '../../utils/api';
 import { auth, isAuthenticated } from '../../firebase';
-import type { Character } from '../../types';
+import type { Character, ResultingAction } from '../../types';
 
 type State = {
 	character: ?Character
@@ -16,6 +16,11 @@ class GamePage extends React.Component<*, State> {
 	state = {
 		character: null
 	};
+
+	constructor(props) {
+		super(props);
+		this.handleAction = this.handleAction.bind(this);
+	}
 
 	componentWillMount() {
 		const { history } = this.props;
@@ -37,16 +42,21 @@ class GamePage extends React.Component<*, State> {
 		});
 	}
 
+	handleAction(action: ResultingAction) {
+		takeAction(this.state.character._partyRef, this.state.character._uid, 'starter', action.id);
+	}
+
 	render() {
 		if (!this.state.character) {
 			return 'Loading...';
 		}
+		console.log(this.state.character);
 		return (
 			<Node
 				node={Advanture['starter']}
 				character={this.state.character}
 				globalTags={[]}
-				onAction={action => console.log(action)}
+				onAction={this.handleAction}
 			/>
 		);
 	}
