@@ -28,13 +28,13 @@ export default ({
 	return tmpl(compiledTemplate, {
 		global: globalTags.reduce((acc, tag) => ({
 			...acc,
-			[tag.name]: true,
+			[tag.id]: true,
 		}), {}),
-		player: {
+		character: {
 			...character,
 			tags: character.tags.reduce((acc, tag) => ({
 				...acc,
-				[tag.name]: true,
+				[tag.id]: true,
 			}), {}),
 		},
 	});
