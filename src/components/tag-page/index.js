@@ -45,7 +45,7 @@ class TagPage extends React.Component {
 		}
 		const tagData = this.state ? this.state.tag : {};
 		return (
-			<div>
+			<div className="tag-page">
 				<h3>Tag page</h3>
 				<TagBuilder onSave={this.handleSave} {...tagData} />
 			</div>

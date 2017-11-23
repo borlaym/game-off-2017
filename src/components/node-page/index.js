@@ -30,7 +30,7 @@ export default class NodePage extends React.Component {
 		}
 		const nodeData = this.state ? this.state.node : {};
 		return (
-			<div>
+			<div className="node-page">
 				<h3>Node page</h3>
 				<NodeBuilder onSave={NodePage.handleSave} {...nodeData} />
 			</div>
