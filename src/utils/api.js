@@ -47,6 +47,14 @@ export function resolveParty(partyId: string): Promise<Party> {
 	});
 }
 
+export function onSaveChange(partyId: string, cb): void {
+	const saveRef = db.ref(`parties/${partyId}`).child('save').limitToLast(1);
+
+	saveRef.on('child_added', (snapshot) => {
+		cb(snapshot.val(), snapshot.key);
+	});
+}
+
 export function takeAction(partyId: string, characterID: string, nodeID: string, actionID: string) {
 	const saveRef = db.ref(`parties/${partyId}/save`);
 	const newSaveStep = saveRef.push();

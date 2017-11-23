@@ -1,10 +1,16 @@
-import { resolveCharacter, resolveParty } from './api';
+import { resolveCharacter, resolveParty, onSaveChange } from './api';
 
 import { auth, isAuthenticated } from '../firebase';
 
 class GameData {
 	constructor(user) {
 		this.user = user;
+	}
+
+	onSaveChange(cb) {
+		this.character.then((character) => {
+			onSaveChange(character._partyRef, cb);
+		});
 	}
 
 	set character(character) {

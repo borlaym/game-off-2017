@@ -24,7 +24,7 @@ const resolveGameState = ({
 	if (!player) {
 		throw new Error('Player not found');
 	}
-	Object.keys(party.save).forEach((saveKey: string) => {
+	Object.keys(party.save || {}).forEach((saveKey: string) => {
 		// Iterate through all save steps
 		const saveStep: SaveStep = party.save[saveKey];
 		const node = adventure[saveStep._nodeRef];

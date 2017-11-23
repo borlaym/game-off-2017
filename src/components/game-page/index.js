@@ -25,14 +25,27 @@ class GamePage extends React.Component<*, State> {
 		};
 		this.handleAction = this.handleAction.bind(this);
 	}
-	componentWillMount() {
+	componentDidMount() {
 		this.props.gameData
-			.then((gameData) => gameData.party)
+			.then(gameData => gameData.party)
 			.then((party) => {
 				this.setState({
 					character: party.character,
 					party,
-					save: party.save
+				}, () => {
+					this.props.gameData.then((gameData) => {
+						gameData.onSaveChange((data, key) => {
+							this.setState({
+								party: {
+									...this.state.party,
+									save: {
+										...this.state.party.save,
+										[key]: data,
+									},
+								},
+							});
+						});
+					});
 				});
 			});
 	}
@@ -52,13 +65,14 @@ class GamePage extends React.Component<*, State> {
 	}
 
 	render() {
-		if (!this.state.character || !this.state.party || !this.state.save) {
+		const { character, party } = this.state;
+		if (!character || !party) {
 			return 'Loading...';
 		}
 		const gameState = resolveGameState({
 			adventure: Adventure,
-			party: this.state.party,
-			playerId: this.state.character._uid,
+			party,
+			playerId: character._uid,
 		});
 		return (
 			<div className="game-page">
