@@ -37,7 +37,9 @@ class GamePage extends React.Component<*, State> {
 					resolveParty(player)
 						.then(party => {
 							this.setState({
-								character: player
+								character: player,
+								party,
+								save: party.save
 							});
 						});
 				})
