@@ -75,12 +75,15 @@ class GamePage extends React.Component<*, State> {
 			playerId: this.state.character._uid,
 		});
 		return (
-			<Node
-				node={gameState.currentNode}
-				character={gameState.player}
-				globalTags={gameState.globalTags}
-				onAction={this.handleAction}
-			/>
+			<div className="game-page">
+				{gameState.log.map(logEntry => <p key={logEntry.timestamp}>{logEntry.text}</p>)}
+				<Node
+					node={gameState.currentNode}
+					character={gameState.player}
+					globalTags={gameState.globalTags}
+					onAction={this.handleAction}
+				/>
+			</div>
 		);
 	}
 }
