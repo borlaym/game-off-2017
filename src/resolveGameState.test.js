@@ -9,7 +9,12 @@ const defaultValue = {
 		save: {},
 		participants: [{
 			_uid: 'player1',
-			name: 'Player',
+			name: 'Player One',
+			tags: [],
+			_partyRef: 'party1',
+		}, {
+			_uid: 'player2',
+			name: 'Player Two',
 			tags: [],
 			_partyRef: 'party1',
 		}],
@@ -40,10 +45,33 @@ describe('resolveGameState', () => {
 			save1: {
 				_nodeRef: 'starter',
 				_characterRef: 'player1',
+				_actionID: '2',
+			},
+		}));
+		expect(gameState.characters).toMatchSnapshot();
+		expect(gameState.currentNode.id).toMatchSnapshot();
+	});
+
+	it('resolves an action that gives a global tag as well', () => {
+		const gameState = resolveGameState(valueWithSave({
+			save1: {
+				_nodeRef: 'starter',
+				_characterRef: 'player1',
 				_actionID: '1',
 			},
 		}));
-		expect(gameState.player).toMatchSnapshot();
+		expect(gameState.characters).toMatchSnapshot();
+		expect(gameState.globalTags).toMatchSnapshot();
+	});
+
+	it('current node is calculated for the current player, not for all players', () => {
+		const gameState = resolveGameState(valueWithSave({
+			save1: {
+				_nodeRef: 'starter',
+				_characterRef: 'player2',
+				_actionID: '1',
+			},
+		}));
 		expect(gameState.currentNode.id).toMatchSnapshot();
 	});
 });
