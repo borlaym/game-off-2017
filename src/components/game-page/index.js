@@ -3,10 +3,11 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import Node from '../node';
-import Advanture from '../../adventure.json';
-import { resolveCharacter, takeAction } from '../../utils/api';
+import Adventure from '../../adventure.json';
+import { resolveCharacter, resolveParty, takeAction } from '../../utils/api';
 import { auth, isAuthenticated } from '../../firebase';
 import type { Character, ResultingAction } from '../../types';
+import resolveGameState from '../../resolveGameState';
 
 type State = {
 	character: ?Character
@@ -20,24 +21,36 @@ class GamePage extends React.Component<*, State> {
 	constructor(props) {
 		super(props);
 		this.handleAction = this.handleAction.bind(this);
-	}
 
+	}
+	
 	componentWillMount() {
 		const { history } = this.props;
-
+		
 		if (!isAuthenticated()) {
 			history.push('/login');
 		}
-
+		
 		auth.onAuthStateChanged((user) => {
 			if (user) {
 				resolveCharacter(user.uid)
-					.then((character) => {
-						this.setState({
-							character
+				.then((player) => {
+					resolveParty(player)
+						.then(party => {
+							console.log(resolveGameState({
+								adventure: Adventure,
+								party,
+								player
+							}))
+							this.setState({
+								character: player
+							});
 						});
-					})
-					.catch(() => history.push('/character/create'));
+				})
+				.catch((err) => {
+					console.log(err);
+					history.push('/character/create')
+				});
 			}
 		});
 	}
@@ -53,7 +66,7 @@ class GamePage extends React.Component<*, State> {
 		console.log(this.state.character);
 		return (
 			<Node
-				node={Advanture['starter']}
+				node={Adventure['starter']}
 				character={this.state.character}
 				globalTags={[]}
 				onAction={this.handleAction}
