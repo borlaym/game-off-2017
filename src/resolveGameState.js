@@ -1,7 +1,6 @@
 // @flow
 
 import type { Party, Character, Adventure, GameState, Tag, SaveStep, Option, ResultingAction, LogEntry } from './types';
-import findLast from 'lodash/findLast';
 
 const resolveGameState = ({
 	adventure,
@@ -14,6 +13,11 @@ const resolveGameState = ({
 }): GameState => {
 	let globalTags: Array<Tag> = [];
 	const resolvedCharacters: Array<Character> = JSON.parse(JSON.stringify(party.participants));
+	resolvedCharacters.forEach((_) => {
+		if (!_.tags) {
+			_.tags = [];
+		}
+	});
 	let currentNode: Node = adventure.starter;
 	const log = [];
 	const player: ?Character = resolvedCharacters.find(_ => _._uid === playerId);

@@ -6,66 +6,70 @@ import Node from '../node';
 import Adventure from '../../adventure.json';
 import { resolveCharacter, resolveParty, takeAction } from '../../utils/api';
 import { auth, isAuthenticated } from '../../firebase';
-import type { Character, ResultingAction } from '../../types';
+import type { Character, ResultingAction, Party, Save } from '../../types';
 import resolveGameState from '../../resolveGameState';
 
 type State = {
-	character: ?Character
+	character: ?Character,
+	party: ?Party,
+	save: ?Save
 };
 
 class GamePage extends React.Component<*, State> {
-	state = {
-		character: null
-	};
-
 	constructor(props) {
 		super(props);
+		this.state = {
+			character: null,
+			party: null,
+			save: null,
+		};
 		this.handleAction = this.handleAction.bind(this);
-
 	}
-	
-	componentDidMount() {
+	componentWillMount() {
 		this.props.gameData
 			.then((gameData) => gameData.party)
 			.then((party) => {
-				console.log(party);
+				this.setState({
+					character: party.character,
+					party,
+					save: party.save
+				});
 			});
-			// resolveCharacter(user.uid)
-			// .then((player) => {
-			// 	resolveParty(player)
-			// 		.then(party => {
-			// 			console.log(resolveGameState({
-			// 				adventure: Adventure,
-			// 				party,
-			// 				player
-			// 			}))
-			// 			this.setState({
-			// 				character: player
-			// 			});
-			// 		});
-			// })
-			// .catch((err) => {
-			// 	console.log(err);
-			// 	history.push('/character/create')
-			// });
 	}
-
+	handleAction: ResultingAction => void;
 	handleAction(action: ResultingAction) {
-		takeAction(this.state.character._partyRef, this.state.character._uid, 'starter', action.id);
+		if (!this.state.character || !this.state.party) {
+			return;
+		}
+		const gameState = resolveGameState({
+			adventure: Adventure,
+			party: this.state.party,
+			playerId: this.state.character._uid,
+		});
+		if (this.state.party) {
+			takeAction(this.state.character._partyRef, gameState.player._uid, gameState.currentNode.id, action.id);
+		}
 	}
 
 	render() {
-		if (!this.state.character) {
+		if (!this.state.character || !this.state.party || !this.state.save) {
 			return 'Loading...';
 		}
-		console.log(this.state.character);
+		const gameState = resolveGameState({
+			adventure: Adventure,
+			party: this.state.party,
+			playerId: this.state.character._uid,
+		});
 		return (
-			<Node
-				node={Adventure['starter']}
-				character={this.state.character}
-				globalTags={[]}
-				onAction={this.handleAction}
-			/>
+			<div className="game-page">
+				{gameState.log.map(logEntry => <p key={logEntry.timestamp}>{logEntry.text}</p>)}
+				<Node
+					node={gameState.currentNode}
+					character={gameState.player}
+					globalTags={gameState.globalTags}
+					onAction={this.handleAction}
+				/>
+			</div>
 		);
 	}
 }
