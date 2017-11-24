@@ -13,4 +13,4 @@ deployment:
     branch: master
     commands:
       - yarn build
-      - firebase deploy --token "$FIREBASE_DEPLOY_TOKEN" --non-interactive
+      - ./node_modules/.bin/firebase deploy --token "$FIREBASE_DEPLOY_TOKEN" --non-interactive
