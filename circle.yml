@@ -7,7 +7,7 @@ dependencies:
 test:
   override:
     - yarn test
-    - yarn eslint ./src/**/*.js
+    - yarn eslint ./src
 deployment:
   master:
     branch: master
