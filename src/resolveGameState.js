@@ -18,7 +18,7 @@ const resolveGameState = ({
 	const resolvedParticipants: Array<Character> = JSON.parse(JSON.stringify(participants));
 	resolvedParticipants.forEach((_) => {
 		if (!_.tags) {
-			_.tags = [];
+			_.tags = []; // eslint-disable-line no-param-reassign
 		}
 	});
 	let currentNode: Node = adventure.starter;
@@ -76,7 +76,7 @@ const resolveGameState = ({
 				text: resolveText({
 					character: actingPlayer,
 					globalTags,
-					template: node.text
+					template: node.text,
 				}),
 				timestamp,
 			});

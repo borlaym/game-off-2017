@@ -1,7 +1,7 @@
 // @flow
 
 import { db } from '../firebase';
-import type { Character, Party, Save } from '../types';
+import type { Character, Party } from '../types';
 
 export function createCharacter(userID: string, characterDetails: Character): Promise<Character> {
 	const dummyCharacter = {

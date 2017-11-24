@@ -29,7 +29,13 @@ export default ({
 		template: text,
 	});
 	return (
-		<div className="event-node__option" onClick={_ => onSelect(option.resultingAction)}>
+		<div
+			className="event-node__option"
+			onClick={() => onSelect(option.resultingAction)}
+			onKeyDown={() => null}
+			role="button"
+			tabIndex={0}
+		>
 			<p className="event-node__option__condition">
 				{visibleTags}
 			</p>

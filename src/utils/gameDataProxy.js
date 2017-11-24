@@ -35,18 +35,14 @@ class GameData {
 		return !this._party
 			? this.character
 				.then(character => resolveParty(character._partyRef).then(party => ({ party, character })))
-				.then(({ party, character }) => {
-					return Promise.all(party.participants.map(resolveCharacter))
-						.then((participants) => {
-							return {
-								party: {
-									...party,
-									participants,
-								},
-								character,
-							};
-						});
-				})
+				.then(({ party, character }) => Promise.all(party.participants.map(resolveCharacter))
+					.then(participants => ({
+						party: {
+							...party,
+							participants,
+						},
+						character,
+					})))
 				.then(({ party, character }) => {
 					this.party = {
 						...party,
