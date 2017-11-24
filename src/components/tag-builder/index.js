@@ -91,7 +91,13 @@ export default class TagBuilder extends React.Component<Props, Tag> {
 				</Grid>
 				<Grid item xs={12}>
 					<Typography type="subheading">Description</Typography>
-					<TextField value={this.state.description} onChange={this.handleDescriptionChange} fullWidth multiline rows={5} />
+					<TextField
+						value={this.state.description}
+						onChange={this.handleDescriptionChange}
+						fullWidth
+						multiline
+						rows={5}
+					/>
 				</Grid>
 				<Grid item xs={12}>
 					<Typography type="subheading">Gains Text</Typography>

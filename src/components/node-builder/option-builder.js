@@ -13,27 +13,7 @@ export default class OptionBuilder extends React.Component {
 		this.state = {
 			id: props.id || '',
 			conditions: props.conditions || [],
-			globalConditions: props.globalConditions || [],
 			text: props.text || '',
-			logText: props.logText || '',
-			skillCheck: props.skillCheck || {},
-			text: props.text || '',
-			resultingAction: props.resultingAction || {
-				id: '',
-				targetNode: '',
-				effects: {
-					gainTags: [],
-					loseTags: []
-				}
-			},
-			failedResultingAction: props.failedResultingAction || {
-				id: '',
-				targetNode: '',
-				effects: {
-					gainTags: [],
-					loseTags: []
-				}
-			},
 		};
 		Object.keys(this.state).forEach((key) => {
 			const capitalized = `${key[0].toUpperCase()}${key.substr(1)}`;
@@ -43,7 +23,7 @@ export default class OptionBuilder extends React.Component {
 
 	handleChange(key, event) {
 		this.setState({
-			[key]: event.target.value
+			[key]: event.target.value,
 		});
 	}
 
@@ -56,12 +36,12 @@ export default class OptionBuilder extends React.Component {
 				</Grid>
 				<Grid item xs={12}>
 					<Typography type="subheading">Character Conditions</Typography>
-					{this.state.conditions.map((condition) => {
+					{this.state.conditions.map(condition => (
 						<Chip
 							label={condition.name}
 							onRequestDelete={this.handleRequestDelete}
 						/>
-					})}
+					))}
 					<TextField value={this.state.conditions} onChange={this.handleConditionsChange} />
 				</Grid>
 				<Grid item xs={12}>

@@ -4,9 +4,9 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
-import { firebaseConfig } from './config';
+import config from './config';
 
-export const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const firebaseApp = firebase.initializeApp(config.firebaseConfig);
 export const db = firebaseApp.database();
 export const auth = firebaseApp.auth();
 export const authProvider = firebase.auth;

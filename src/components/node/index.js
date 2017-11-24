@@ -1,9 +1,9 @@
 // @flow
 
 import * as React from 'react';
-import type { Node, Tag, Option, Character } from '../../types';
-import OptionComponent from './option';
 import intersection from 'lodash/intersection';
+import type { Node, Tag, Character } from '../../types';
+import OptionComponent from './option';
 import resolveText from '../../utils/textResolver';
 
 export default ({
@@ -24,10 +24,16 @@ export default ({
 	const visibleOptions = options.filter((option) => {
 		const fullfillsGlobalCondition =
 			option.globalConditions.length === 0 ||
-			intersection(globalTags.map(_ => _.name), option.globalConditions.map(_ => _.name)).length > 0;
+			intersection(
+				globalTags.map(_ => _.name),
+				option.globalConditions.map(_ => _.name),
+			).length > 0;
 		const fullfillsPlayerCondition =
 			option.conditions.length === 0 ||
-			intersection(character.tags.map(_ => _.name), option.conditions.map(_ => _.name)).length > 0;
+			intersection(
+				character.tags.map(_ => _.name),
+				option.conditions.map(_ => _.name),
+			).length > 0;
 		return fullfillsGlobalCondition && fullfillsPlayerCondition;
 	});
 	const resolvedText = resolveText({
