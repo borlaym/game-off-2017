@@ -8,3 +8,8 @@ test:
   override:
     - yarn test
     - yarn eslint ./src/**/*.js
+deployment:
+  master:
+    branch: master
+    commands:
+      - firebase deploy --token "$FIREBASE_DEPLOY_TOKEN" --non-interactive
