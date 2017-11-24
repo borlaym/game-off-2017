@@ -24,11 +24,11 @@ CLERK LADY: Name.",
     "timestamp": 4102441322000,
   },
   Object {
-    "text": "<%=o.player.name%> says his name.",
+    "text": "Player Two says her name.",
     "timestamp": 4102441322001,
   },
   Object {
-    "text": "<%=o.player.name%> says his name.",
+    "text": "Player One says his name.",
     "timestamp": 4102441322002,
   },
 ]
@@ -42,6 +42,7 @@ Array [
     "_partyRef": "party1",
     "_uid": "player1",
     "name": "Player One",
+    "sex": "male",
     "tags": Array [
       "BORN ON EARTH",
     ],
@@ -50,6 +51,7 @@ Array [
     "_partyRef": "party1",
     "_uid": "player2",
     "name": "Player Two",
+    "sex": "female",
     "tags": Array [],
   },
 ]
@@ -67,6 +69,7 @@ Array [
     "_partyRef": "party1",
     "_uid": "player1",
     "name": "Player One",
+    "sex": "male",
     "tags": Array [
       "RAISED BY DIVINE ORDER",
     ],
@@ -75,6 +78,7 @@ Array [
     "_partyRef": "party1",
     "_uid": "player2",
     "name": "Player Two",
+    "sex": "female",
     "tags": Array [],
   },
 ]
@@ -89,12 +93,14 @@ Object {
       "_partyRef": "party1",
       "_uid": "player1",
       "name": "Player One",
+      "sex": "male",
       "tags": Array [],
     },
     Object {
       "_partyRef": "party1",
       "_uid": "player2",
       "name": "Player Two",
+      "sex": "female",
       "tags": Array [],
     },
   ],
@@ -175,6 +181,7 @@ The line at the employment office is long enough that you start daydreaming abou
     "_partyRef": "party1",
     "_uid": "player1",
     "name": "Player One",
+    "sex": "male",
     "tags": Array [],
   },
 }

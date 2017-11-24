@@ -10,11 +10,13 @@ const defaultValue = {
 		_uid: 'player1',
 		name: 'Player One',
 		tags: [],
+		sex: 'male',
 		_partyRef: 'party1',
 	}, {
 		_uid: 'player2',
 		name: 'Player Two',
 		tags: [],
+		sex: 'female',
 		_partyRef: 'party1',
 	}],
 	playerId: 'player1',
