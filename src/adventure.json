@@ -70,8 +70,8 @@
 		"inGameTimestamp": "2100-01-01 00:02:01",
 		"options": [{
 			"id": "1",
-			"text": "<%=o.self.name%>",
-			"logText": "<%=o.player.name%> says his name.",
+			"text": "NAME",
+			"logText": "NAME says XYRS name.",
 			"conditions": [],
 			"globalConditions": [],
 			"resultingAction": {

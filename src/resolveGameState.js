@@ -1,6 +1,7 @@
 // @flow
 
 import type { Save, Character, Adventure, GameState, Tag, SaveStep, Option, ResultingAction, LogEntry } from './types';
+import resolveText from './utils/textResolver';
 
 const resolveGameState = ({
 	adventure,
@@ -72,7 +73,11 @@ const resolveGameState = ({
 			const timestamp = (new Date(currentNode.inGameTimestamp)).getTime();
 			// Add message to log
 			log.push({
-				text: node.text,
+				text: resolveText({
+					character: actingPlayer,
+					globalTags,
+					template: node.text
+				}),
 				timestamp,
 			});
 			// Add all player interactions on this node to the log
@@ -82,8 +87,14 @@ const resolveGameState = ({
 				allPlayerSavesOnThisNode.map((currentSaveStep: SaveStep, index: number) => {
 					const action: ResultingAction = allActions.find(_ => _.id === currentSaveStep._actionID);
 					const option: Option = node.options.find(_ => _.resultingAction.id === action.id);
+					const actionPlayer: Character =
+						resolvedParticipants.find(_ => _._uid === currentSaveStep._characterRef);
 					return {
-						text: option.logText || option.text,
+						text: resolveText({
+							character: actionPlayer,
+							globalTags,
+							template: option.logText || option.text,
+						}),
 						timestamp: timestamp + (index + 1),
 					};
 				});

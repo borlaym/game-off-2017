@@ -4,20 +4,18 @@ import * as React from 'react';
 import type { Node, Tag, Option, Character } from '../../types';
 import OptionComponent from './option';
 import intersection from 'lodash/intersection';
-import textResolver from '../../utils/textResolver';
+import resolveText from '../../utils/textResolver';
 
 export default ({
 	node,
 	character,
 	globalTags,
 	onAction,
-	resolution,
 }: {
 	node: Node,
 	character: Character,
 	globalTags: Array<Tag>,
 	onAction: Function,
-	resolution?: Option
 }) => {
 	const {
 		text,
@@ -32,29 +30,27 @@ export default ({
 			intersection(character.tags.map(_ => _.name), option.conditions.map(_ => _.name)).length > 0;
 		return fullfillsGlobalCondition && fullfillsPlayerCondition;
 	});
-	const resolveText = textResolver(globalTags, character);
+	const resolvedText = resolveText({
+		globalTags,
+		character,
+		template: text,
+	});
 	return (
 		<div className="event-node">
 			<div className="event-node__text">
-				{resolveText(text)}
+				{resolvedText}
 			</div>
-			{ resolution ? (
-				<div className="event-node__result">
-					{resolveText(resolution.logText)}
-				</div>
-			) : (
-				<div className="event-node__options">
-					{visibleOptions.map(option => (
-						<OptionComponent
-							key={option.id}
-							character={character}
-							globalTags={globalTags}
-							option={option}
-							onSelect={_ => onAction(_)}
-						/>
-					))}
-				</div>
-			)}
+			<div className="event-node__options">
+				{visibleOptions.map(option => (
+					<OptionComponent
+						key={option.id}
+						character={character}
+						globalTags={globalTags}
+						option={option}
+						onSelect={_ => onAction(_)}
+					/>
+				))}
+			</div>
 		</div>
 	);
 };
