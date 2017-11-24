@@ -1,4 +1,6 @@
 machine:
+  timezone:
+    Europe/Budapest
   node:
     version: 8.9.0
 dependencies:
@@ -6,8 +8,8 @@ dependencies:
     - yarn
 test:
   override:
-    - yarn test
-    - yarn eslint ./src/**/*.js
+    - yarn test -- --bail
+    - yarn eslint ./src
 deployment:
   master:
     branch: master
