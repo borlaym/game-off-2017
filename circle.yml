@@ -6,7 +6,7 @@ dependencies:
     - yarn
 test:
   override:
-    - yarn test
+    - yarn test -- --bail
     - yarn eslint ./src
 deployment:
   master:
