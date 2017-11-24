@@ -1,6 +1,6 @@
 machine:
   timezone:
-    Hungary/Budapest
+    Europe/Budapest
   node:
     version: 8.9.0
 dependencies:
